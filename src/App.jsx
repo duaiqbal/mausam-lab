@@ -33,6 +33,7 @@ import InitiativesEditor  from "./admin/editors/InitiativesEditor";
 import ProjectsEditor     from "./admin/editors/ProjectsEditor";
 import TeamEditor         from "./admin/editors/TeamEditor";
 import OpportunitiesEditor from "./admin/editors/OpportunitiesEditor";
+import MausamSkillsEditor from "./admin/editors/MausamSkillsEditor";
 import SiteEditor         from "./admin/editors/SiteEditor";
 
 export default function App() {
@@ -92,6 +93,7 @@ export default function App() {
             <Route path="projects"        element={<ProjectsEditor />} />
             <Route path="team"            element={<TeamEditor />} />
             <Route path="opportunities"   element={<OpportunitiesEditor />} />
+            <Route path="skills"          element={<MausamSkillsEditor />} />
             <Route path="site"            element={<SiteEditor />} />
           </Route>
 

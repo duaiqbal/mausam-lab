@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 const SECTIONS = [
-  { label: "Research articles", table: "research",       to: "/admin/research",      icon: "🔬" },
-  { label: "Publications",      table: "publications",   to: "/admin/publications",  icon: "📄" },
-  { label: "Initiatives",       table: "initiatives",    to: "/admin/initiatives",   icon: "🌱" },
-  { label: "Projects",          table: "projects",       to: "/admin/projects",      icon: "📁" },
-  { label: "Team members",      table: "team_members",   to: "/admin/team",          icon: "👥" },
-  { label: "Opportunities",     table: "opportunities",  to: "/admin/opportunities", icon: "🎯" },
+  { label: "Research articles", table: "research",           to: "/admin/research",      icon: "🔬" },
+  { label: "Publications",      table: "publications",       to: "/admin/publications",  icon: "📄" },
+  { label: "Initiatives",       table: "initiatives",        to: "/admin/initiatives",   icon: "🌱" },
+  { label: "Projects",          table: "projects",           to: "/admin/projects",      icon: "📁" },
+  { label: "Team members",      table: "team_members",       to: "/admin/team",          icon: "👥" },
+  { label: "Opportunities",     table: "opportunities",      to: "/admin/opportunities", icon: "🎯" },
+  { label: "Skills categories", table: "skills_categories",  to: "/admin/skills",        icon: "📘" },
 ];
 
 export default function AdminDashboard() {

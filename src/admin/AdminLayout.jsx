@@ -10,6 +10,7 @@ const NAV = [
   { to: "/admin/projects",      label: "Projects",      icon: "📁" },
   { to: "/admin/team",          label: "Team",          icon: "👥" },
   { to: "/admin/opportunities", label: "Opportunities", icon: "🎯" },
+  { to: "/admin/skills",        label: "Mausam Skills",  icon: "📘" },
   { to: "/admin/site",          label: "Brand & About", icon: "⚙️" },
 ];
 
