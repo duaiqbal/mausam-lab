@@ -231,3 +231,14 @@ alter publication supabase_realtime add table public.projects;
 alter publication supabase_realtime add table public.team_members;
 alter publication supabase_realtime add table public.opportunities;
 alter publication supabase_realtime add table public.site_config;
+
+-- =============================================================================
+-- ADD EXCERPT + ARTICLE_BODY COLUMNS TO PUBLICATIONS
+-- Run this in Supabase SQL Editor if your table already exists
+-- =============================================================================
+alter table public.publications
+  add column if not exists excerpt      text not null default '',
+  add column if not exists article_body text not null default '';
+
+-- Migrate existing description data to excerpt (keep description for backwards compat)
+-- update public.publications set excerpt = description where excerpt = '';

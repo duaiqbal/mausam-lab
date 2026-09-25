@@ -11,7 +11,7 @@ const TYPES = ["Research", "Policy Brief", "Article", "Commentary", "Explainer",
 
 const EMPTY = {
   title: "", type: "Research", author: "", date: "",
-  description: "", download_url: "", image_url: "", sort_order: 0,
+  excerpt: "", article_body: "", download_url: "", image_url: "", sort_order: 0,
 };
 
 const COLS = [
@@ -34,9 +34,9 @@ export default function PublicationsEditor() {
   }
   useEffect(() => { load(); }, []);
 
-  function openAdd()  { setForm(EMPTY); setError(""); setModal("add"); }
-  function openEdit(row) { setForm(row); setError(""); setModal("edit"); }
-  function close()    { setModal(null); }
+  function openAdd()     { setForm(EMPTY); setError(""); setModal("add"); }
+  function openEdit(row) { setForm({ ...EMPTY, ...row }); setError(""); setModal("edit"); }
+  function close()       { setModal(null); }
 
   async function save() {
     setError(""); setSaving(true);
@@ -73,24 +73,66 @@ export default function PublicationsEditor() {
 
       {modal && (
         <Modal title={modal === "add" ? "New publication" : "Edit publication"} onClose={close}>
+
           <Field label="Title" required>
             <Input value={form.title} onChange={set("title")} placeholder="Publication title" required />
           </Field>
+
           <Field label="Type" required>
             <Select value={form.type} onChange={set("type")} options={TYPES} />
           </Field>
+
           <Field label="Author">
             <Input value={form.author} onChange={set("author")} placeholder="Author(s)" />
           </Field>
-          <Field label="Date" hint="e.g. 'January 2024'">
-            <Input value={form.date} onChange={set("date")} placeholder="January 2024" />
+
+          <Field label="Date" hint="Format: DD/MM/YYYY — e.g. 15/09/2024">
+            <Input value={form.date} onChange={set("date")} placeholder="15/09/2024" />
           </Field>
-          <Field label="Description">
-            <Textarea value={form.description} onChange={set("description")} placeholder="Short description of this publication…" rows={3} />
+
+          {/* DIVIDER */}
+          <div style={dividerStyle}>
+            <span style={dividerLabel}>Content</span>
+          </div>
+
+          <Field
+            label="Excerpt"
+            required
+            hint="20–25 word summary shown on the Publications page under the title. Keep it concise."
+          >
+            <Textarea
+              value={form.excerpt || ""}
+              onChange={set("excerpt")}
+              placeholder="A short 20–25 word summary that appears on the main Publications page…"
+              rows={3}
+            />
+            {/* Word count helper */}
+            <span style={wordCount}>
+              {(form.excerpt || "").trim().split(/\s+/).filter(Boolean).length} words
+            </span>
           </Field>
-          <Field label="Download URL" hint="Link to PDF or external page (optional)">
+
+          <Field
+            label="Main Article"
+            hint="The full article content. Only shown when the reader clicks 'Read More'."
+          >
+            <Textarea
+              value={form.article_body || ""}
+              onChange={set("article_body")}
+              placeholder={"Full article text here...\n\nYou can use blank lines to separate paragraphs."}
+              rows={14}
+            />
+          </Field>
+
+          {/* DIVIDER */}
+          <div style={dividerStyle}>
+            <span style={dividerLabel}>Links &amp; Media</span>
+          </div>
+
+          <Field label="Download URL" hint="Link to PDF or external page (optional — used for non-article publications)">
             <Input value={form.download_url || ""} onChange={set("download_url")} placeholder="https://…" />
           </Field>
+
           <Field label="Cover image">
             <ImageUpload
               currentUrl={form.image_url}
@@ -98,9 +140,11 @@ export default function PublicationsEditor() {
               folder="publications"
             />
           </Field>
-          <Field label="Sort order" hint="Lower = appears first">
+
+          <Field label="Sort order" hint="Lower number = appears first">
             <Input type="number" value={form.sort_order} onChange={set("sort_order")} />
           </Field>
+
           {error && <p style={errStyle}>{error}</p>}
           <SaveBar onSave={save} onCancel={close} saving={saving} />
         </Modal>
@@ -109,8 +153,11 @@ export default function PublicationsEditor() {
   );
 }
 
-const hdr    = { display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: "0.5rem" };
-const h1     = { margin: 0, fontSize: "1.6rem", color: "#1f5b4c" };
-const sub    = { margin: "0.25rem 0 0", color: "#5b6b63", fontSize: "0.875rem" };
-const addBtn = { padding: "0.55rem 1.25rem", background: "#1f5b4c", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
+const hdr      = { display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: "0.5rem" };
+const h1       = { margin: 0, fontSize: "1.6rem", color: "#1f5b4c" };
+const sub      = { margin: "0.25rem 0 0", color: "#5b6b63", fontSize: "0.875rem" };
+const addBtn   = { padding: "0.55rem 1.25rem", background: "#1f5b4c", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
 const errStyle = { color: "#c0392b", fontSize: "0.8rem", background: "#fdf2f2", border: "1px solid #f5c6c6", borderRadius: 6, padding: "0.4rem 0.75rem" };
+const dividerStyle = { borderTop: "1px solid #dfe7e2", margin: "1.25rem 0 1rem", position: "relative", textAlign: "center" };
+const dividerLabel = { fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#5b6b63", background: "#fff", padding: "0 8px", position: "relative", top: -9 };
+const wordCount    = { fontSize: "0.72rem", color: "#5b6b63", display: "block", textAlign: "right", marginTop: 4 };
