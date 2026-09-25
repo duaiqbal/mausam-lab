@@ -43,7 +43,9 @@ function ArticleModal({ pub, onClose }) {
               <p key={i} style={m.para}>{para.trim()}</p>
             ))
           ) : pub.description ? (
-            <p style={m.para}>{pub.description}</p>
+            pub.description.split("\n\n").filter(p => p.trim()).map((para, i) => (
+              <p key={i} style={m.para}>{para.trim()}</p>
+            ))
           ) : (
             <p style={{ color: "var(--color-text-muted)", fontStyle: "italic" }}>
               No article content added yet.
@@ -72,9 +74,10 @@ function ArticleModal({ pub, onClose }) {
 function PubCard({ pub, onReadMore }) {
   const imageUrl    = pub.image_url || null;
   const type        = pub.type || "Publication";
-  const excerpt     = pub.excerpt || pub.description || "";
+  const excerpt     = pub.excerpt || "";
   const downloadUrl = pub.download_url || pub.downloadUrl || null;
-  const hasArticle  = !!(pub.article_body || pub.description);
+  // Show Read More if there is ANY content — article_body, description, or download
+  const hasContent  = !!(pub.article_body || pub.description || downloadUrl);
 
   return (
     <div style={c.card}>
@@ -94,7 +97,7 @@ function PubCard({ pub, onReadMore }) {
         {/* Title */}
         <h3 style={c.title}>{pub.title}</h3>
 
-        {/* Excerpt — short summary */}
+        {/* Excerpt — short summary (only if filled in) */}
         {excerpt && <p style={c.excerpt}>{excerpt}</p>}
 
         {/* Author · Date */}
@@ -102,9 +105,9 @@ function PubCard({ pub, onReadMore }) {
           <p style={c.meta}>{[pub.author, pub.date].filter(Boolean).join(" · ")}</p>
         )}
 
-        {/* Actions */}
+        {/* Buttons — always show Read More if there is any content */}
         <div style={c.btnRow}>
-          {(hasArticle) && (
+          {hasContent && (
             <button onClick={() => onReadMore(pub)} style={c.readMoreBtn}>
               Read More
             </button>
