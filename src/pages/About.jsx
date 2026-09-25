@@ -2,18 +2,18 @@ import PageMeta from "./PageMeta";
 
 const TEAM = {
   Leadership: [
-    { name: "Areeba Kanwal",       role: "Founder & Executive Director" },
+    { name: "Areeba Kanwal",        role: "Founder & Executive Director" },
     { name: "Syed Kazim Raza Shah", role: "Assistant Executive Director" },
   ],
   "Research & Policy Department": [
-    { name: "Ghazala Ishaq",  role: "Head of Research & Policy" },
-    { name: "Maria Aslam",    role: "Research Associate" },
-    { name: "Attia Shamim",   role: "Research Associate" },
+    { name: "Ghazala Ishaq", role: "Head of Research & Policy" },
+    { name: "Maria Aslam",   role: "Research Associate" },
+    { name: "Attia Shamim",  role: "Research Associate" },
   ],
   "Internal Affairs Team": [
-    { name: "Zubair Mahar",   role: "Head of Internal Affairs" },
-    { name: "Maryam Akmal",   role: "Internal Affairs Associate" },
-    { name: "Tooba Iqbal",    role: "Internal Affairs Associate" },
+    { name: "Zubair Mahar",  role: "Head of Internal Affairs" },
+    { name: "Maryam Akmal",  role: "Internal Affairs Associate" },
+    { name: "Tooba Iqbal",   role: "Internal Affairs Associate" },
   ],
   "External Affairs Department": [
     { name: "Syed Umer Akhter", role: "Head of External Affairs" },
@@ -53,11 +53,11 @@ export default function About() {
     <>
       <PageMeta title="About" description="Mausam Lab is a youth-led climate policy, research, and sustainability platform based in Pakistan." />
 
-      {/* ── Section 1: Who We Are ── */}
+      {/* Who We Are */}
       <section className="section section-alt">
         <div className="container">
           <div style={s.twoCol}>
-            <div style={s.textCol}>
+            <div>
               <span className="eyebrow">About</span>
               <h1 style={s.h1}>Who We Are</h1>
               <p>
@@ -73,7 +73,7 @@ export default function About() {
             </div>
             <div style={s.mapCol}>
               <div style={s.mapBox}>
-                <span style={s.mapEmoji}>🇵🇰</span>
+                <p style={s.mapPk}>PK</p>
                 <p style={s.mapLabel}>Pakistan</p>
               </div>
             </div>
@@ -81,19 +81,19 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 2: Mission & Vision ── */}
+      {/* Mission & Vision */}
       <section className="section">
         <div className="container">
           <div className="grid grid-2">
             <div style={s.mvCard}>
-              <span style={s.mvIcon}>🎯</span>
+              <div style={s.mvBar} />
               <h3 style={s.mvTitle}>Our Mission</h3>
               <p style={s.mvText}>
                 To produce accessible, locally grounded, and policy-relevant climate knowledge, while creating meaningful opportunities for young people to engage in research, policy, and climate action.
               </p>
             </div>
             <div style={s.mvCard}>
-              <span style={s.mvIcon}>🔭</span>
+              <div style={s.mvBar} />
               <h3 style={s.mvTitle}>Our Vision</h3>
               <p style={s.mvText}>
                 A climate-resilient Pakistan where evidence informs decisions, young people contribute directly to climate solutions, and local realities shape how climate challenges are understood and addressed.
@@ -103,7 +103,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 3: Our Approach ── */}
+      {/* Our Approach */}
       <section className="section section-alt">
         <div className="container">
           <div style={{ textAlign: "center", marginBottom: 40 }}>
@@ -113,7 +113,7 @@ export default function About() {
               {APPROACH_STEPS.map((step, i) => (
                 <span key={step.label} style={s.stripItem}>
                   <span style={s.stripPill}>{step.label}</span>
-                  {i < APPROACH_STEPS.length - 1 && <span style={s.stripArrow}>→</span>}
+                  {i < APPROACH_STEPS.length - 1 && <span style={s.stripDivider} aria-hidden="true" />}
                 </span>
               ))}
             </div>
@@ -129,7 +129,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 4: Why Mausam Lab ── */}
+      {/* Why Mausam Lab */}
       <section className="section">
         <div className="container">
           <div style={s.whyInner}>
@@ -148,7 +148,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 5: Focus Areas ── */}
+      {/* Focus Areas */}
       <section className="section section-alt">
         <div className="container">
           <div style={{ textAlign: "center", marginBottom: 32 }}>
@@ -166,7 +166,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Section 6: Our Team ── */}
+      {/* Our Team */}
       <section className="section">
         <div className="container">
           <div style={{ textAlign: "center", marginBottom: 40 }}>
@@ -176,16 +176,13 @@ export default function About() {
               Mausam Lab is built by young researchers, communicators, and practitioners working across different areas of climate and organisational development.
             </p>
           </div>
-
           {Object.entries(TEAM).map(([dept, members]) => (
             <div key={dept} style={s.deptBlock}>
               <h3 style={s.deptTitle}>{dept}</h3>
               <div style={s.teamGrid}>
                 {members.map(m => (
                   <div key={m.name} style={s.teamCard}>
-                    <div style={s.avatar} aria-hidden="true">
-                      {m.name.charAt(0)}
-                    </div>
+                    <div style={s.avatar}>{m.name.charAt(0)}</div>
                     <h4 style={s.memberName}>{m.name}</h4>
                     <p style={s.memberRole}>{m.role}</p>
                   </div>
@@ -193,7 +190,6 @@ export default function About() {
               </div>
             </div>
           ))}
-
           <p style={s.teamClosing}>
             Mausam Lab is designed to grow with the people who contribute to it. As our research, programs, and collaborations expand, our team and areas of work will evolve with them.
           </p>
@@ -204,87 +200,66 @@ export default function About() {
 }
 
 const s = {
-  /* Who We Are */
   twoCol:   { display: "grid", gridTemplateColumns: "60% 1fr", gap: 48, alignItems: "center" },
-  textCol:  {},
+  h1:       { margin: "4px 0 16px" },
   mapCol:   { display: "flex", justifyContent: "center" },
-  mapBox:   {
-    background: "var(--color-primary)",
-    borderRadius: 16,
-    width: 260, height: 260,
+  mapBox: {
+    background: "var(--color-primary)", borderRadius: 12,
+    width: 220, height: 220,
     display: "flex", flexDirection: "column",
-    alignItems: "center", justifyContent: "center", gap: 12,
+    alignItems: "center", justifyContent: "center", gap: 8,
   },
-  mapEmoji: { fontSize: "4rem" },
-  mapLabel: { color: "#fff", fontWeight: 600, fontSize: 18, margin: 0 },
+  mapPk:    { color: "#fff", fontFamily: "var(--font-heading)", fontSize: 48, fontWeight: 600, margin: 0, lineHeight: 1 },
+  mapLabel: { color: "rgba(255,255,255,0.75)", fontWeight: 500, fontSize: 14, margin: 0, letterSpacing: "0.08em", textTransform: "uppercase" },
   tagline:  { fontWeight: 600, color: "var(--color-primary)", fontSize: 15, letterSpacing: "0.02em", marginTop: 8 },
-
-  /* Mission / Vision */
-  mvCard:  {
+  mvCard: {
     border: "1px solid var(--color-border)", borderRadius: "var(--radius)",
-    padding: 32, background: "var(--color-surface)",
-    boxShadow: "var(--shadow-sm)",
+    padding: 32, background: "var(--color-surface)", boxShadow: "var(--shadow-sm)",
   },
-  mvIcon:  { fontSize: "2rem", display: "block", marginBottom: 12 },
+  mvBar:   { width: 40, height: 3, background: "var(--color-accent)", borderRadius: 2, marginBottom: 16 },
   mvTitle: { color: "var(--color-primary)", fontWeight: 600, marginBottom: 12 },
   mvText:  { color: "var(--color-text-muted)", lineHeight: 1.7, margin: 0, fontSize: 15 },
-
-  /* Approach */
-  stripRow:   { display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 6, marginTop: 16 },
-  stripItem:  { display: "flex", alignItems: "center", gap: 6 },
-  stripPill:  {
+  stripRow:    { display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 0, marginTop: 16 },
+  stripItem:   { display: "flex", alignItems: "center" },
+  stripPill: {
     background: "var(--color-primary)", color: "#fff",
-    padding: "8px 18px", borderRadius: 999,
-    fontWeight: 600, fontSize: 14,
+    padding: "9px 20px", fontSize: 13, fontWeight: 600,
+    letterSpacing: "0.04em", textTransform: "uppercase",
   },
-  stripArrow: { color: "var(--color-text-muted)", fontSize: "1.1rem" },
+  stripDivider: { width: 24, height: 2, background: "var(--color-accent)", display: "inline-block" },
   approachCard: {
     background: "var(--color-surface)", border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius)", padding: 20,
+    borderRadius: "var(--radius)", padding: 20, borderTop: "3px solid var(--color-primary)",
   },
-  approachTitle: { color: "var(--color-primary)", fontWeight: 600, marginBottom: 8, fontSize: 16 },
+  approachTitle: { color: "var(--color-primary)", fontWeight: 600, marginBottom: 8, fontSize: 15 },
   approachDesc:  { color: "var(--color-text-muted)", fontSize: 14, lineHeight: 1.6, margin: 0 },
-
-  /* Why */
-  whyInner:   { maxWidth: 780, margin: "0 auto" },
-
-  /* Focus Areas */
-  focusIntro: { color: "var(--color-text-muted)", maxWidth: 640, margin: "0 auto" },
-  pillGrid:   {
-    display: "flex", flexWrap: "wrap", gap: 10,
-    justifyContent: "center",
-  },
-
-  /* Team */
-  deptBlock:  { marginBottom: 48 },
-  deptTitle:  {
-    color: "var(--color-primary)", fontWeight: 600, fontSize: 20,
+  whyInner:      { maxWidth: 780, margin: "0 auto" },
+  focusIntro:    { color: "var(--color-text-muted)", maxWidth: 640, margin: "0 auto" },
+  pillGrid:      { display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" },
+  deptBlock:     { marginBottom: 48 },
+  deptTitle: {
+    color: "var(--color-primary)", fontWeight: 600, fontSize: 18,
     borderBottom: "2px solid var(--color-accent)", paddingBottom: 8,
     marginBottom: 24, display: "inline-block",
   },
-  teamGrid:   {
+  teamGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-    gap: 20,
-    justifyItems: "center",
+    gap: 20, justifyItems: "center",
   },
-  teamCard:   {
+  teamCard: {
     background: "var(--color-surface)", border: "1px solid var(--color-border)",
     borderRadius: "var(--radius)", padding: "24px 16px",
-    textAlign: "center", width: "100%",
-    boxShadow: "var(--shadow-sm)",
-    transition: "box-shadow 0.15s, transform 0.15s",
+    textAlign: "center", width: "100%", boxShadow: "var(--shadow-sm)",
   },
   avatar: {
-    width: 64, height: 64, borderRadius: "50%",
+    width: 56, height: 56, borderRadius: "50%",
     background: "var(--color-primary)", color: "#fff",
     display: "flex", alignItems: "center", justifyContent: "center",
-    fontSize: 24, fontWeight: 700, margin: "0 auto 12px",
+    fontSize: 22, fontWeight: 700, margin: "0 auto 12px",
+    fontFamily: "var(--font-heading)",
   },
-  memberName: { color: "var(--color-primary)", fontSize: 15, fontWeight: 600, margin: "0 0 4px" },
-  memberRole: { color: "var(--color-text-muted)", fontSize: 13, margin: 0, lineHeight: 1.4 },
-  teamClosing: {
-    textAlign: "center", color: "var(--color-text-muted)",
-    fontSize: 14, maxWidth: 600, margin: "16px auto 0", fontStyle: "italic",
-  },
+  memberName:   { color: "var(--color-primary)", fontSize: 14, fontWeight: 600, margin: "0 0 4px" },
+  memberRole:   { color: "var(--color-text-muted)", fontSize: 13, margin: 0, lineHeight: 1.4 },
+  teamClosing:  { textAlign: "center", color: "var(--color-text-muted)", fontSize: 14, maxWidth: 600, margin: "16px auto 0", fontStyle: "italic" },
 };

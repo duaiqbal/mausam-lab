@@ -2,13 +2,13 @@ import { Link } from "react-router-dom";
 import PageMeta from "./PageMeta";
 
 const CATEGORIES = [
-  { icon: "🎓", label: "Internships",           desc: "Research and professional learning opportunities for students and early-career researchers." },
-  { icon: "🏅", label: "Fellowships",            desc: "Structured opportunities focused on research, leadership, policy, and climate practice." },
-  { icon: "🔬", label: "Research Programs",      desc: "Collaborative research initiatives addressing climate and sustainability challenges." },
-  { icon: "📚", label: "Training & Workshops",   desc: "Practical learning opportunities in research, policy, communication, and climate practice." },
-  { icon: "🌍", label: "Community Initiatives",  desc: "Locally grounded initiatives connecting climate knowledge with community needs." },
-  { icon: "📁", label: "Climate Projects",       desc: "Research and practical projects developed around specific climate and sustainability challenges." },
-  { icon: "👩‍🎓", label: "Youth Programs",        desc: "Opportunities for young people to engage in climate research, policy, leadership, and action." },
+  { label: "Internships",          desc: "Research and professional learning opportunities for students and early-career researchers." },
+  { label: "Fellowships",          desc: "Structured opportunities focused on research, leadership, policy, and climate practice." },
+  { label: "Research Programs",    desc: "Collaborative research initiatives addressing climate and sustainability challenges." },
+  { label: "Training & Workshops", desc: "Practical learning opportunities in research, policy, communication, and climate practice." },
+  { label: "Community Initiatives",desc: "Locally grounded initiatives connecting climate knowledge with community needs." },
+  { label: "Climate Projects",     desc: "Research and practical projects developed around specific climate and sustainability challenges." },
+  { label: "Youth Programs",       desc: "Opportunities for young people to engage in climate research, policy, leadership, and action." },
 ];
 
 export default function Programs() {
@@ -16,10 +16,10 @@ export default function Programs() {
     <>
       <PageMeta title="Programs" description="Mausam Lab programs and initiatives connecting research, skills, policy, and climate practice." />
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <section className="page-hero">
         <div className="container">
-          <span className="eyebrow">Programs & Initiatives</span>
+          <span className="eyebrow">Programs &amp; Initiatives</span>
           <h1>From knowledge to practice.</h1>
           <p>
             Mausam Lab develops programs and initiatives that connect research, skills, policy, and climate
@@ -28,11 +28,11 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* ── Current Program: REI ── */}
+      {/* Current Program */}
       <section className="section section-alt">
         <div className="container">
           <div style={s.currentBand}>
-            <span style={s.currentLabel}>CURRENT PROGRAM</span>
+            <span style={s.currentLabel}>Current Program</span>
             <div style={s.currentInner}>
               <div style={{ flex: 1 }}>
                 <h2 style={s.currentTitle}>Research Internship Programme</h2>
@@ -42,30 +42,29 @@ export default function Programs() {
                   sustainability, policy, and public communication.
                 </p>
                 <div style={s.metaRow}>
-                  <span className="tag">📅 6 Weeks</span>
-                  <span className="tag">💻 Online</span>
+                  <span className="tag">6 Weeks</span>
+                  <span className="tag">Online</span>
                   <span className="tag tag-open">Applications Open</span>
                 </div>
               </div>
               <div style={s.currentCta}>
-                <Link to="/programs/rei" className="btn btn-primary">View Programme →</Link>
+                <Link to="/programs/rei" className="btn btn-primary">View Programme</Link>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── Programs Grid ── */}
+      {/* Programs Grid */}
       <section className="section">
         <div className="container">
           <div style={{ marginBottom: 40 }}>
-            <span className="eyebrow">Our Programs & Initiatives</span>
-            <h2>Programs & Initiatives</h2>
+            <span className="eyebrow">Our Programs &amp; Initiatives</span>
+            <h2>Programs &amp; Initiatives</h2>
           </div>
           <div className="grid grid-4">
             {CATEGORIES.map(cat => (
               <div key={cat.label} style={s.catCard}>
-                <span style={s.catIcon}>{cat.icon}</span>
                 <h3 style={s.catTitle}>{cat.label}</h3>
                 <p style={s.catDesc}>{cat.desc}</p>
               </div>
@@ -74,7 +73,7 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* ── CTA band ── */}
+      {/* CTA */}
       <section style={s.ctaBand}>
         <div className="container" style={{ textAlign: "center" }}>
           <span className="eyebrow">Explore Our Work</span>
@@ -83,7 +82,7 @@ export default function Programs() {
             From research internships to collaborative climate initiatives, our programs are
             designed to move knowledge beyond the page and into practice.
           </p>
-          <Link to="/get-involved" className="btn btn-primary">View All Programs →</Link>
+          <Link to="/get-involved" className="btn btn-primary">View All Programs</Link>
         </div>
       </section>
     </>
@@ -92,17 +91,14 @@ export default function Programs() {
 
 const s = {
   currentBand: {
-    border: "1.5px solid var(--color-border)",
-    borderRadius: "var(--radius)",
-    background: "var(--color-surface)",
-    padding: 32,
-    boxShadow: "var(--shadow-md)",
+    border: "1.5px solid var(--color-border)", borderRadius: "var(--radius)",
+    background: "var(--color-surface)", padding: 36, boxShadow: "var(--shadow-md)",
   },
   currentLabel: {
-    fontSize: 11, fontWeight: 700, letterSpacing: "0.1em",
-    color: "var(--color-accent)", display: "block", marginBottom: 12,
+    fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
+    color: "var(--color-accent)", display: "block", marginBottom: 14,
   },
-  currentInner:    { display: "flex", gap: 32, alignItems: "flex-start", flexWrap: "wrap" },
+  currentInner:    { display: "flex", gap: 40, alignItems: "flex-start", flexWrap: "wrap" },
   currentTitle:    { color: "var(--color-primary)", marginBottom: 6 },
   currentSubtitle: { color: "var(--color-accent)", fontWeight: 600, fontSize: 15, marginBottom: 12 },
   currentDesc:     { color: "var(--color-text-muted)", fontSize: 15, lineHeight: 1.6, marginBottom: 16 },
@@ -111,10 +107,9 @@ const s = {
   catCard: {
     background: "var(--color-surface)", border: "1px solid var(--color-border)",
     borderRadius: "var(--radius)", padding: 24,
-    display: "flex", flexDirection: "column", gap: 8,
+    borderTop: "3px solid var(--color-primary)",
   },
-  catIcon:  { fontSize: "1.8rem" },
-  catTitle: { fontWeight: 600, color: "var(--color-primary)", fontSize: 16, margin: 0 },
+  catTitle: { fontWeight: 600, color: "var(--color-primary)", fontSize: 15, marginBottom: 8 },
   catDesc:  { color: "var(--color-text-muted)", fontSize: 14, lineHeight: 1.5, margin: 0 },
   ctaBand:  { background: "var(--color-neutral-light)", padding: "var(--space-6) 0", borderTop: "1px solid var(--color-border)" },
   ctaH2:    { color: "var(--color-primary)", marginBottom: 16 },

@@ -4,21 +4,18 @@ import SectionHeader from "../components/SectionHeader";
 import PageMeta from "./PageMeta";
 import { useCmsData } from "../lib/useCmsData";
 import { publications } from "../data/publications";
-import { researchItems } from "../data/research";
 
 const WHAT_WE_DO = [
-  { icon: "🔍", label: "Research", desc: "We investigate climate and sustainability challenges through locally grounded research." },
-  { icon: "📋", label: "Policy",   desc: "We turn research into policy analysis and practical recommendations." },
-  { icon: "🛠", label: "Skills",   desc: "We build practical skills in research, writing, policy, and communication." },
-  { icon: "⚙️", label: "Practice", desc: "We run programs that connect knowledge with real-world challenges." },
-  { icon: "🌱", label: "Action",   desc: "We support young people, institutions, and communities in applying that knowledge." },
+  { label: "Research",  desc: "We investigate climate and sustainability challenges through locally grounded research." },
+  { label: "Policy",    desc: "We turn research into policy analysis and practical recommendations." },
+  { label: "Skills",    desc: "We build practical skills in research, writing, policy, and communication." },
+  { label: "Practice",  desc: "We run programs that connect knowledge with real-world challenges." },
+  { label: "Action",    desc: "We support young people, institutions, and communities in applying that knowledge." },
 ];
 
 export default function Home() {
-  const { data: pubs }     = useCmsData("publications", publications);
-  const { data: research } = useCmsData("research", researchItems);
-
-  const featuredPubs = pubs.slice(0, 4);
+  const { data: pubs } = useCmsData("publications", publications);
+  const featuredPubs   = pubs.slice(0, 3);
 
   return (
     <>
@@ -28,14 +25,14 @@ export default function Home() {
       />
       <Hero />
 
-      {/* ── What We Do ── */}
+      {/* What We Do */}
       <section className="section section-alt">
         <div className="container">
           <SectionHeader eyebrow="What We Do" title="Five ways we work on climate" align="center" />
           <div className="grid grid-5" style={{ marginTop: 0 }}>
             {WHAT_WE_DO.map(item => (
               <div key={item.label} style={s.whatCard}>
-                <span style={s.whatIcon}>{item.icon}</span>
+                <div style={s.whatAccent} />
                 <h3 style={s.whatTitle}>{item.label}</h3>
                 <p style={s.whatDesc}>{item.desc}</p>
               </div>
@@ -44,7 +41,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Featured Publications ── */}
+      {/* Featured Publications */}
       <section className="section">
         <div className="container">
           <SectionHeader
@@ -58,12 +55,12 @@ export default function Home() {
             ))}
           </div>
           <div style={{ marginTop: 32, textAlign: "center" }}>
-            <Link to="/publications" className="btn btn-secondary">View All Publications →</Link>
+            <Link to="/publications" className="btn btn-secondary">View All Publications</Link>
           </div>
         </div>
       </section>
 
-      {/* ── Collaborate CTA ── */}
+      {/* Collaborate CTA */}
       <section style={s.ctaBand}>
         <div className="container" style={{ textAlign: "center" }}>
           <h2 style={s.ctaH2}>Have an idea worth working on?</h2>
@@ -71,7 +68,7 @@ export default function Home() {
             We collaborate with researchers, students, universities, organizations, practitioners,
             and institutions on research, policy, learning, and climate initiatives.
           </p>
-          <Link to="/get-involved" className="btn btn-primary">Collaborate With Us →</Link>
+          <Link to="/get-involved" className="btn btn-primary">Collaborate With Us</Link>
         </div>
       </section>
     </>
@@ -79,28 +76,29 @@ export default function Home() {
 }
 
 function PubCard({ pub }) {
-  const type       = pub.type || "Publication";
-  const title      = pub.title || "";
-  const author     = pub.author || "";
-  const date       = pub.date || "";
-  const desc       = pub.description || "";
-  const imageUrl   = pub.image_url || null;
+  const type     = pub.type || "Publication";
+  const imageUrl = pub.image_url || null;
+  const downloadUrl = pub.download_url || pub.downloadUrl || null;
 
   return (
-    <div className="card">
+    <div className="card" style={{ padding: 0, overflow: "hidden" }}>
       {imageUrl ? (
-        <img src={imageUrl} alt={title} style={s.pubImg} />
+        <img src={imageUrl} alt={pub.title} style={s.pubImg} />
       ) : (
         <div style={s.pubImgPlaceholder} />
       )}
-      <div style={{ padding: "0" }}>
-        <span className="tag tag-accent" style={{ marginBottom: 10, display: "inline-block" }}>{type}</span>
-        <h3 style={s.pubTitle}>{title}</h3>
-        {(author || date) && (
-          <p style={s.pubMeta}>{[author, date].filter(Boolean).join(" · ")}</p>
+      <div style={{ padding: 24 }}>
+        <span className="tag tag-accent" style={{ marginBottom: 10 }}>{type}</span>
+        <h3 style={s.pubTitle}>{pub.title}</h3>
+        {(pub.author || pub.date) && (
+          <p style={s.pubMeta}>{[pub.author, pub.date].filter(Boolean).join(" · ")}</p>
         )}
-        {desc && <p style={s.pubDesc}>{desc}</p>}
-        <Link to="/publications" style={s.readMore}>Read More →</Link>
+        {pub.description && <p style={s.pubDesc}>{pub.description}</p>}
+        {downloadUrl ? (
+          <a href={downloadUrl} target="_blank" rel="noreferrer" style={s.readMore}>Read More</a>
+        ) : (
+          <Link to="/publications" style={s.readMore}>View Publications</Link>
+        )}
       </div>
     </div>
   );
@@ -112,17 +110,18 @@ const s = {
     border: "1px solid var(--color-border)",
     borderRadius: "var(--radius)",
     padding: "24px 20px",
-    display: "flex", flexDirection: "column", alignItems: "flex-start", gap: 8,
+    display: "flex", flexDirection: "column", gap: 10,
+    borderTop: "3px solid var(--color-primary)",
   },
-  whatIcon:  { fontSize: "1.6rem" },
-  whatTitle: { fontSize: 17, fontWeight: 600, color: "var(--color-primary)", margin: 0 },
-  whatDesc:  { fontSize: 14, color: "var(--color-text-muted)", margin: 0, lineHeight: 1.5 },
-  pubImg:    { width: "100%", aspectRatio: "4/3", objectFit: "cover", borderRadius: "6px 6px 0 0", marginBottom: 16 },
-  pubImgPlaceholder: { width: "100%", aspectRatio: "4/3", background: "var(--color-neutral-light)", borderRadius: "6px 6px 0 0", marginBottom: 16 },
-  pubTitle:  { fontSize: 17, fontWeight: 600, color: "var(--color-primary)", marginBottom: 6 },
-  pubMeta:   { fontSize: 13, color: "var(--color-text-muted)", marginBottom: 8 },
-  pubDesc:   { fontSize: 14, color: "var(--color-text-muted)", marginBottom: 12, lineHeight: 1.5 },
-  readMore:  { fontSize: 14, fontWeight: 600, color: "var(--color-accent)", textDecoration: "none" },
+  whatAccent: { display: "none" },
+  whatTitle:  { fontSize: 16, fontWeight: 600, color: "var(--color-primary)", margin: 0 },
+  whatDesc:   { fontSize: 14, color: "var(--color-text-muted)", margin: 0, lineHeight: 1.6 },
+  pubImg:             { width: "100%", aspectRatio: "4/3", objectFit: "cover" },
+  pubImgPlaceholder:  { width: "100%", aspectRatio: "4/3", background: "var(--color-neutral-light)" },
+  pubTitle:   { fontSize: 16, fontWeight: 600, color: "var(--color-primary)", marginBottom: 6, lineHeight: 1.3 },
+  pubMeta:    { fontSize: 13, color: "var(--color-text-muted)", marginBottom: 8 },
+  pubDesc:    { fontSize: 14, color: "var(--color-text-muted)", marginBottom: 12, lineHeight: 1.5 },
+  readMore:   { fontSize: 13, fontWeight: 600, color: "var(--color-accent)", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.04em" },
   ctaBand: {
     background: "var(--color-neutral-light)",
     padding: "var(--space-6) 0",

@@ -1,12 +1,6 @@
 import { Link } from "react-router-dom";
 
-const STEPS = [
-  { icon: "🔍", label: "Research" },
-  { icon: "📋", label: "Policy" },
-  { icon: "🛠", label: "Skills" },
-  { icon: "⚙️", label: "Practice" },
-  { icon: "🌱", label: "Action" },
-];
+const STEPS = ["Research", "Policy", "Skills", "Practice", "Action"];
 
 export default function Hero() {
   return (
@@ -20,19 +14,16 @@ export default function Hero() {
             challenges, build practical knowledge, and connect evidence with action.
           </p>
           <div style={s.actions}>
-            <Link to="/publications" className="btn btn-primary">Explore Our Research →</Link>
-            <Link to="/about" className="btn btn-secondary" style={s.btnSec}>Learn About Mausam Lab →</Link>
+            <Link to="/publications" className="btn btn-primary">Explore Our Research</Link>
+            <Link to="/about" className="btn btn-secondary" style={s.btnSec}>Learn About Mausam Lab</Link>
           </div>
 
-          {/* Process strip */}
+          {/* Process strip — text only, no emojis or arrows */}
           <div style={s.strip}>
             {STEPS.map((step, i) => (
-              <span key={step.label} style={s.stripRow}>
-                <span style={s.stepWrap}>
-                  <span style={s.stepIcon}>{step.icon}</span>
-                  <span style={s.stepLabel}>{step.label}</span>
-                </span>
-                {i < STEPS.length - 1 && <span style={s.arrow}>→</span>}
+              <span key={step} style={s.stripRow}>
+                <span style={s.stepPill}>{step}</span>
+                {i < STEPS.length - 1 && <span style={s.divider} aria-hidden="true" />}
               </span>
             ))}
           </div>
@@ -43,11 +34,8 @@ export default function Hero() {
 }
 
 const s = {
-  hero: {
-    background: "var(--color-primary)",
-    padding: "120px 0",
-  },
-  inner: { maxWidth: 780 },
+  hero:    { background: "var(--color-primary)", padding: "120px 0" },
+  inner:   { maxWidth: 780 },
   eyebrow: { color: "var(--color-accent-light)" },
   h1: {
     color: "#fff",
@@ -65,25 +53,30 @@ const s = {
     marginBottom: 32,
   },
   actions: { display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 48 },
-  btnSec: { borderColor: "rgba(255,255,255,0.6)", color: "#fff" },
+  btnSec:  { borderColor: "rgba(255,255,255,0.6)", color: "#fff" },
   strip: {
     display: "flex",
     alignItems: "center",
     flexWrap: "wrap",
-    gap: 4,
+    gap: 0,
     background: "rgba(255,255,255,0.08)",
     borderRadius: 8,
-    padding: "16px 20px",
-    maxWidth: 560,
+    padding: "14px 20px",
+    maxWidth: 540,
   },
-  stripRow: { display: "flex", alignItems: "center", gap: 4 },
-  stepWrap: { display: "flex", flexDirection: "column", alignItems: "center", gap: 4 },
-  stepIcon: {
-    width: 40, height: 40, borderRadius: "50%",
-    background: "rgba(255,255,255,0.12)",
-    display: "flex", alignItems: "center", justifyContent: "center",
-    fontSize: "1.1rem",
+  stripRow:  { display: "flex", alignItems: "center" },
+  stepPill: {
+    fontSize: 13,
+    fontWeight: 600,
+    color: "#fff",
+    letterSpacing: "0.05em",
+    textTransform: "uppercase",
+    padding: "0 12px",
   },
-  stepLabel: { fontSize: 12, fontWeight: 600, color: "rgba(255,255,255,0.9)", letterSpacing: "0.04em" },
-  arrow: { color: "rgba(255,255,255,0.4)", fontSize: "1.1rem", marginBottom: 20, paddingBottom: 4 },
+  divider: {
+    width: 1,
+    height: 18,
+    background: "rgba(255,255,255,0.25)",
+    display: "inline-block",
+  },
 };
