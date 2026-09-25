@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import PageMeta from "./PageMeta";
 import SectionHeader from "../components/SectionHeader";
+import { useCmsData } from "../lib/useCmsData";
+import { opportunities as staticOpps } from "../data/opportunities";
 
 const CATEGORIES = [
   { label: "Internships",           desc: "Research and professional learning opportunities for students and early-career researchers." },
@@ -13,10 +15,19 @@ const CATEGORIES = [
 ];
 
 export default function Programs() {
+  // Fetch all opportunities from Supabase (falls back to static if DB empty)
+  const { data: allOpps, loading } = useCmsData("opportunities", staticOpps);
+
+  // Show only open / coming soon opportunities as "current programs"
+  const currentPrograms = allOpps.filter(o =>
+    o.status === "Open" || o.status === "Closing soon" || o.status === "Coming soon"
+  );
+
   return (
     <>
       <PageMeta title="Programs" description="Mausam Lab programs and initiatives." />
 
+      {/* Hero */}
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow">Programs &amp; Initiatives</span>
@@ -30,36 +41,56 @@ export default function Programs() {
         </div>
       </section>
 
-      {/* Current Program */}
-      <section className="section section-alt">
-        <div className="container">
-          <SectionHeader eyebrow="Current Program" title="Research Internship Programme" />
-          <div style={s.currentBand}>
-            <div style={s.currentInner}>
-              <div style={{ flex: 1 }}>
-                <p style={s.currentSubtitle}>Mausam Lab × Rethinking Economics Islamabad</p>
-                <p style={s.currentDesc}>
-                  A six-week interdisciplinary research internship connecting economics, climate,
-                  sustainability, policy, and public communication.
-                </p>
-                <div style={s.metaRow}>
-                  <span className="tag">6 Weeks</span>
-                  <span className="tag">Online</span>
-                  <span className="tag tag-open">Applications Open</span>
+      {/* Current Programs — fetched live from CMS */}
+      {!loading && currentPrograms.length > 0 && (
+        <section className="section section-alt">
+          <div className="container">
+            <SectionHeader eyebrow="Current Programs" title="Current Programs &amp; Opportunities" />
+            <div style={s.oppGrid}>
+              {currentPrograms.map(opp => (
+                <div key={opp.id} style={s.oppCard}>
+                  <div style={s.oppCardTop}>
+                    <span className="tag tag-accent">{opp.category}</span>
+                    <span className={`tag ${opp.status === "Open" || opp.status === "Closing soon" ? "tag-open" : ""}`}>
+                      {opp.status}
+                    </span>
+                  </div>
+                  <h3 style={s.oppTitle}>{opp.title}</h3>
+                  {opp.description && <p style={s.oppDesc}>{opp.description}</p>}
+                  <div style={s.oppMeta}>
+                    {opp.deadline && (
+                      <span style={s.oppMetaItem}>Deadline: {opp.deadline}</span>
+                    )}
+                    {opp.eligibility && (
+                      <span style={s.oppMetaItem}>Eligibility: {opp.eligibility}</span>
+                    )}
+                  </div>
+                  {opp.application_link && (
+                    <a
+                      href={opp.application_link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="btn btn-primary"
+                      style={{ marginTop: 16, display: "inline-block" }}
+                    >
+                      Apply Now
+                    </a>
+                  )}
                 </div>
-              </div>
-              <div style={s.currentCta}>
-                <Link to="/programs/rei" className="btn btn-primary">View Programme</Link>
-              </div>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Programs Grid */}
       <section className="section">
         <div className="container">
-          <SectionHeader eyebrow="Our Work" title="Programs &amp; Initiatives" description="Explore the range of programs and initiatives Mausam Lab develops and delivers." />
+          <SectionHeader
+            eyebrow="Our Work"
+            title="Programs &amp; Initiatives"
+            description="Explore the range of programs and initiatives Mausam Lab develops and delivers."
+          />
           <div className="grid grid-4">
             {CATEGORIES.map(cat => (
               <div key={cat.label} style={s.catCard}>
@@ -88,15 +119,25 @@ export default function Programs() {
 }
 
 const s = {
-  currentBand: {
-    border: "1px solid var(--color-border)", borderRadius: "var(--radius)",
-    background: "#fff", padding: "32px 36px", boxShadow: "var(--shadow-md)",
+  /* Current programs grid */
+  oppGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+    gap: 24,
   },
-  currentInner:    { display: "flex", gap: 40, alignItems: "center", flexWrap: "wrap" },
-  currentSubtitle: { color: "var(--color-accent)", fontWeight: 600, fontSize: 15, marginBottom: 12 },
-  currentDesc:     { color: "var(--color-text-muted)", fontSize: 15, lineHeight: 1.7, marginBottom: 16 },
-  metaRow:         { display: "flex", gap: 8, flexWrap: "wrap" },
-  currentCta:      { flexShrink: 0 },
+  oppCard: {
+    background: "#fff", border: "1px solid var(--color-border)",
+    borderRadius: "var(--radius)", padding: "28px 28px 24px",
+    boxShadow: "var(--shadow-sm)",
+    borderTop: "3px solid var(--color-primary)",
+    display: "flex", flexDirection: "column",
+  },
+  oppCardTop: { display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 14 },
+  oppTitle:   { color: "var(--color-primary)", fontSize: 18, fontWeight: 600, marginBottom: 10, lineHeight: 1.3 },
+  oppDesc:    { color: "var(--color-text-muted)", fontSize: 14, lineHeight: 1.6, marginBottom: 12 },
+  oppMeta:    { display: "flex", flexDirection: "column", gap: 4 },
+  oppMetaItem:{ fontSize: 13, color: "var(--color-text-muted)" },
+  /* Category cards */
   catCard: {
     background: "#fff", border: "1px solid var(--color-border)",
     borderRadius: "var(--radius)", padding: "24px 20px",
@@ -104,8 +145,9 @@ const s = {
   },
   catTitle: { fontWeight: 600, color: "var(--color-primary)", fontSize: 15, marginBottom: 8 },
   catDesc:  { color: "var(--color-text-muted)", fontSize: 14, lineHeight: 1.6, margin: 0 },
-  ctaBand:  { background: "var(--color-primary)", padding: "var(--space-6) 0" },
-  ctaH2:    { color: "#fff", margin: 0 },
+  /* CTA band */
+  ctaBand:    { background: "var(--color-primary)", padding: "var(--space-6) 0" },
+  ctaH2:      { color: "#fff", margin: 0 },
   ctaDivider: { width: 50, height: 3, background: "var(--color-accent)", borderRadius: 2, margin: "16px auto 20px" },
-  ctaP:     { color: "rgba(255,255,255,0.85)", maxWidth: 580, margin: "0 auto 32px", fontSize: 16 },
+  ctaP:       { color: "rgba(255,255,255,0.85)", maxWidth: 580, margin: "0 auto 32px", fontSize: 16 },
 };

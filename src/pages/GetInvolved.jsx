@@ -28,11 +28,11 @@ const PANELS = {
     title: "Internship Opportunities",
     intro: "Gain practical experience through Mausam Lab's research, policy, communication, and programme-based internships.",
     body: [
-      { heading: "Current programme", items: ["Research Internship Programme — Mausam Lab × Rethinking Economics Islamabad (Cohort 3, Applications Open)"] },
+      { heading: "Current programme", items: ["Research Internship Programme — currently open. Visit our Programs page to view details and apply."] },
       { heading: "Types of internships", items: ["Research and policy internships", "Communications and content internships", "Programme coordination internships", "Data and analysis internships"] },
-      { heading: "How to apply", items: ["Visit the programme page for the REI internship to apply directly", "For other internship queries, email mausamlab@gmail.com"] },
+      { heading: "How to apply", items: ["Visit the Programs page to view currently open internships and apply directly", "For general internship queries, email mausamlab@gmail.com"] },
     ],
-    cta: { label: "View REI Programme", to: "/programs/rei" },
+    cta: { label: "View Our Programs", to: "/programs" },
   },
   work: {
     title: "Work With Us",
