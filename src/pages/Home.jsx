@@ -19,20 +19,17 @@ export default function Home() {
 
   return (
     <>
-      <PageMeta
-        title="Home"
-        description="Mausam Lab is a youth-led climate research and policy platform studying climate challenges and connecting evidence with action."
-      />
+      <PageMeta title="Home" description="Mausam Lab is a youth-led climate research and policy platform." />
       <Hero />
 
       {/* What We Do */}
       <section className="section section-alt">
         <div className="container">
-          <SectionHeader eyebrow="What We Do" title="Five ways we work on climate" align="center" />
-          <div className="grid grid-5" style={{ marginTop: 0 }}>
-            {WHAT_WE_DO.map(item => (
+          <SectionHeader eyebrow="What We Do" title="Five Ways We Work on Climate" />
+          <div className="grid grid-5">
+            {WHAT_WE_DO.map((item, i) => (
               <div key={item.label} style={s.whatCard}>
-                <div style={s.whatAccent} />
+                <div style={s.whatNum}>{String(i + 1).padStart(2, "0")}</div>
                 <h3 style={s.whatTitle}>{item.label}</h3>
                 <p style={s.whatDesc}>{item.desc}</p>
               </div>
@@ -49,12 +46,12 @@ export default function Home() {
             title="Featured Publications"
             description="A selection of our latest research, policy work, and climate analysis."
           />
-          <div className="grid grid-3" style={{ marginTop: 0 }}>
+          <div className="grid grid-3">
             {(featuredPubs.length > 0 ? featuredPubs : publications.slice(0, 3)).map(pub => (
               <PubCard key={pub.id} pub={pub} />
             ))}
           </div>
-          <div style={{ marginTop: 32, textAlign: "center" }}>
+          <div style={s.centerBtn}>
             <Link to="/publications" className="btn btn-secondary">View All Publications</Link>
           </div>
         </div>
@@ -63,7 +60,8 @@ export default function Home() {
       {/* Collaborate CTA */}
       <section style={s.ctaBand}>
         <div className="container" style={{ textAlign: "center" }}>
-          <h2 style={s.ctaH2}>Have an idea worth working on?</h2>
+          <h2 style={s.ctaH2}>Have an Idea Worth Working On?</h2>
+          <div style={s.ctaDivider} />
           <p style={s.ctaP}>
             We collaborate with researchers, students, universities, organizations, practitioners,
             and institutions on research, policy, learning, and climate initiatives.
@@ -76,18 +74,18 @@ export default function Home() {
 }
 
 function PubCard({ pub }) {
-  const type     = pub.type || "Publication";
-  const imageUrl = pub.image_url || null;
+  const type        = pub.type || "Publication";
+  const imageUrl    = pub.image_url || null;
   const downloadUrl = pub.download_url || pub.downloadUrl || null;
 
   return (
-    <div className="card" style={{ padding: 0, overflow: "hidden" }}>
+    <div style={s.pubCard}>
       {imageUrl ? (
         <img src={imageUrl} alt={pub.title} style={s.pubImg} />
       ) : (
         <div style={s.pubImgPlaceholder} />
       )}
-      <div style={{ padding: 24 }}>
+      <div style={s.pubBody}>
         <span className="tag tag-accent" style={{ marginBottom: 10 }}>{type}</span>
         <h3 style={s.pubTitle}>{pub.title}</h3>
         {(pub.author || pub.date) && (
@@ -106,27 +104,24 @@ function PubCard({ pub }) {
 
 const s = {
   whatCard: {
-    background: "var(--color-surface)",
-    border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius)",
-    padding: "24px 20px",
-    display: "flex", flexDirection: "column", gap: 10,
-    borderTop: "3px solid var(--color-primary)",
+    background: "#fff", border: "1px solid var(--color-border)",
+    borderRadius: "var(--radius)", padding: "28px 20px",
+    borderTop: "3px solid var(--color-primary)", textAlign: "center",
   },
-  whatAccent: { display: "none" },
-  whatTitle:  { fontSize: 16, fontWeight: 600, color: "var(--color-primary)", margin: 0 },
-  whatDesc:   { fontSize: 14, color: "var(--color-text-muted)", margin: 0, lineHeight: 1.6 },
-  pubImg:             { width: "100%", aspectRatio: "4/3", objectFit: "cover" },
-  pubImgPlaceholder:  { width: "100%", aspectRatio: "4/3", background: "var(--color-neutral-light)" },
-  pubTitle:   { fontSize: 16, fontWeight: 600, color: "var(--color-primary)", marginBottom: 6, lineHeight: 1.3 },
-  pubMeta:    { fontSize: 13, color: "var(--color-text-muted)", marginBottom: 8 },
-  pubDesc:    { fontSize: 14, color: "var(--color-text-muted)", marginBottom: 12, lineHeight: 1.5 },
-  readMore:   { fontSize: 13, fontWeight: 600, color: "var(--color-accent)", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.04em" },
-  ctaBand: {
-    background: "var(--color-neutral-light)",
-    padding: "var(--space-6) 0",
-    borderTop: "1px solid var(--color-border)",
-  },
-  ctaH2: { color: "var(--color-primary)", marginBottom: 16 },
-  ctaP:  { color: "var(--color-text-muted)", maxWidth: 600, margin: "0 auto 32px", fontSize: 17 },
+  whatNum:   { fontSize: 28, fontWeight: 700, color: "var(--color-border)", fontFamily: "var(--font-heading)", marginBottom: 8 },
+  whatTitle: { fontSize: 16, fontWeight: 600, color: "var(--color-primary)", margin: "0 0 8px" },
+  whatDesc:  { fontSize: 14, color: "var(--color-text-muted)", margin: 0, lineHeight: 1.6 },
+  pubCard:   { background: "#fff", border: "1px solid var(--color-border)", borderRadius: "var(--radius)", overflow: "hidden", display: "flex", flexDirection: "column" },
+  pubImg:    { width: "100%", aspectRatio: "4/3", objectFit: "cover" },
+  pubImgPlaceholder: { width: "100%", aspectRatio: "4/3", background: "var(--color-neutral-light)" },
+  pubBody:   { padding: 24, display: "flex", flexDirection: "column", flex: 1 },
+  pubTitle:  { fontSize: 16, fontWeight: 600, color: "var(--color-primary)", marginBottom: 6, lineHeight: 1.3 },
+  pubMeta:   { fontSize: 13, color: "var(--color-text-muted)", marginBottom: 8 },
+  pubDesc:   { fontSize: 14, color: "var(--color-text-muted)", marginBottom: 14, lineHeight: 1.5, flex: 1 },
+  readMore:  { fontSize: 13, fontWeight: 600, color: "var(--color-accent)", textDecoration: "none", textTransform: "uppercase", letterSpacing: "0.05em" },
+  centerBtn: { marginTop: 36, textAlign: "center" },
+  ctaBand:   { background: "var(--color-primary)", padding: "var(--space-6) 0" },
+  ctaH2:     { color: "#fff", margin: 0 },
+  ctaDivider:{ width: 50, height: 3, background: "var(--color-accent)", borderRadius: 2, margin: "16px auto 20px" },
+  ctaP:      { color: "rgba(255,255,255,0.85)", maxWidth: 600, margin: "0 auto 32px", fontSize: 16 },
 };

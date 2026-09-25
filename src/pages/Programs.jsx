@@ -1,29 +1,31 @@
 import { Link } from "react-router-dom";
 import PageMeta from "./PageMeta";
+import SectionHeader from "../components/SectionHeader";
 
 const CATEGORIES = [
-  { label: "Internships",          desc: "Research and professional learning opportunities for students and early-career researchers." },
-  { label: "Fellowships",          desc: "Structured opportunities focused on research, leadership, policy, and climate practice." },
-  { label: "Research Programs",    desc: "Collaborative research initiatives addressing climate and sustainability challenges." },
-  { label: "Training & Workshops", desc: "Practical learning opportunities in research, policy, communication, and climate practice." },
-  { label: "Community Initiatives",desc: "Locally grounded initiatives connecting climate knowledge with community needs." },
-  { label: "Climate Projects",     desc: "Research and practical projects developed around specific climate and sustainability challenges." },
-  { label: "Youth Programs",       desc: "Opportunities for young people to engage in climate research, policy, leadership, and action." },
+  { label: "Internships",           desc: "Research and professional learning opportunities for students and early-career researchers." },
+  { label: "Fellowships",           desc: "Structured opportunities focused on research, leadership, policy, and climate practice." },
+  { label: "Research Programs",     desc: "Collaborative research initiatives addressing climate and sustainability challenges." },
+  { label: "Training & Workshops",  desc: "Practical learning opportunities in research, policy, communication, and climate practice." },
+  { label: "Community Initiatives", desc: "Locally grounded initiatives connecting climate knowledge with community needs." },
+  { label: "Climate Projects",      desc: "Research and practical projects developed around specific climate and sustainability challenges." },
+  { label: "Youth Programs",        desc: "Opportunities for young people to engage in climate research, policy, leadership, and action." },
 ];
 
 export default function Programs() {
   return (
     <>
-      <PageMeta title="Programs" description="Mausam Lab programs and initiatives connecting research, skills, policy, and climate practice." />
+      <PageMeta title="Programs" description="Mausam Lab programs and initiatives." />
 
-      {/* Hero */}
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow">Programs &amp; Initiatives</span>
-          <h1>From knowledge to practice.</h1>
+          <h1>From Knowledge to Practice</h1>
+          <div className="hero-divider" />
           <p>
-            Mausam Lab develops programs and initiatives that connect research, skills, policy, and climate
-            practice. Explore our current and past work across research, learning, youth engagement, and climate action.
+            Mausam Lab develops programs and initiatives that connect research, skills, policy, and
+            climate practice. Explore our current and past work across research, learning, youth
+            engagement, and climate action.
           </p>
         </div>
       </section>
@@ -31,11 +33,10 @@ export default function Programs() {
       {/* Current Program */}
       <section className="section section-alt">
         <div className="container">
+          <SectionHeader eyebrow="Current Program" title="Research Internship Programme" />
           <div style={s.currentBand}>
-            <span style={s.currentLabel}>Current Program</span>
             <div style={s.currentInner}>
               <div style={{ flex: 1 }}>
-                <h2 style={s.currentTitle}>Research Internship Programme</h2>
                 <p style={s.currentSubtitle}>Mausam Lab × Rethinking Economics Islamabad</p>
                 <p style={s.currentDesc}>
                   A six-week interdisciplinary research internship connecting economics, climate,
@@ -58,10 +59,7 @@ export default function Programs() {
       {/* Programs Grid */}
       <section className="section">
         <div className="container">
-          <div style={{ marginBottom: 40 }}>
-            <span className="eyebrow">Our Programs &amp; Initiatives</span>
-            <h2>Programs &amp; Initiatives</h2>
-          </div>
+          <SectionHeader eyebrow="Our Work" title="Programs &amp; Initiatives" description="Explore the range of programs and initiatives Mausam Lab develops and delivers." />
           <div className="grid grid-4">
             {CATEGORIES.map(cat => (
               <div key={cat.label} style={s.catCard}>
@@ -76,8 +74,8 @@ export default function Programs() {
       {/* CTA */}
       <section style={s.ctaBand}>
         <div className="container" style={{ textAlign: "center" }}>
-          <span className="eyebrow">Explore Our Work</span>
           <h2 style={s.ctaH2}>Explore Our Work</h2>
+          <div style={s.ctaDivider} />
           <p style={s.ctaP}>
             From research internships to collaborative climate initiatives, our programs are
             designed to move knowledge beyond the page and into practice.
@@ -91,27 +89,23 @@ export default function Programs() {
 
 const s = {
   currentBand: {
-    border: "1.5px solid var(--color-border)", borderRadius: "var(--radius)",
-    background: "var(--color-surface)", padding: 36, boxShadow: "var(--shadow-md)",
+    border: "1px solid var(--color-border)", borderRadius: "var(--radius)",
+    background: "#fff", padding: "32px 36px", boxShadow: "var(--shadow-md)",
   },
-  currentLabel: {
-    fontSize: 11, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
-    color: "var(--color-accent)", display: "block", marginBottom: 14,
-  },
-  currentInner:    { display: "flex", gap: 40, alignItems: "flex-start", flexWrap: "wrap" },
-  currentTitle:    { color: "var(--color-primary)", marginBottom: 6 },
+  currentInner:    { display: "flex", gap: 40, alignItems: "center", flexWrap: "wrap" },
   currentSubtitle: { color: "var(--color-accent)", fontWeight: 600, fontSize: 15, marginBottom: 12 },
-  currentDesc:     { color: "var(--color-text-muted)", fontSize: 15, lineHeight: 1.6, marginBottom: 16 },
+  currentDesc:     { color: "var(--color-text-muted)", fontSize: 15, lineHeight: 1.7, marginBottom: 16 },
   metaRow:         { display: "flex", gap: 8, flexWrap: "wrap" },
-  currentCta:      { display: "flex", alignItems: "center", paddingTop: 8 },
+  currentCta:      { flexShrink: 0 },
   catCard: {
-    background: "var(--color-surface)", border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius)", padding: 24,
-    borderTop: "3px solid var(--color-primary)",
+    background: "#fff", border: "1px solid var(--color-border)",
+    borderRadius: "var(--radius)", padding: "24px 20px",
+    borderTop: "3px solid var(--color-primary)", textAlign: "center",
   },
   catTitle: { fontWeight: 600, color: "var(--color-primary)", fontSize: 15, marginBottom: 8 },
-  catDesc:  { color: "var(--color-text-muted)", fontSize: 14, lineHeight: 1.5, margin: 0 },
-  ctaBand:  { background: "var(--color-neutral-light)", padding: "var(--space-6) 0", borderTop: "1px solid var(--color-border)" },
-  ctaH2:    { color: "var(--color-primary)", marginBottom: 16 },
-  ctaP:     { color: "var(--color-text-muted)", maxWidth: 580, margin: "0 auto 32px", fontSize: 16 },
+  catDesc:  { color: "var(--color-text-muted)", fontSize: 14, lineHeight: 1.6, margin: 0 },
+  ctaBand:  { background: "var(--color-primary)", padding: "var(--space-6) 0" },
+  ctaH2:    { color: "#fff", margin: 0 },
+  ctaDivider: { width: 50, height: 3, background: "var(--color-accent)", borderRadius: 2, margin: "16px auto 20px" },
+  ctaP:     { color: "rgba(255,255,255,0.85)", maxWidth: 580, margin: "0 auto 32px", fontSize: 16 },
 };

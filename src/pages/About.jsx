@@ -1,31 +1,39 @@
+import { useMemo } from "react";
 import PageMeta from "./PageMeta";
+import SectionHeader from "../components/SectionHeader";
+import logo from "../assets/logo.png";
+import { useCmsData } from "../lib/useCmsData";
 
-const TEAM = {
+// Static fallback — only shown if Supabase has no data yet
+const STATIC_TEAM = {
   Leadership: [
-    { name: "Areeba Kanwal",        role: "Founder & Executive Director" },
-    { name: "Syed Kazim Raza Shah", role: "Assistant Executive Director" },
+    { name: "Areeba Kanwal",        role: "Founder & Executive Director",   department: "Leadership" },
+    { name: "Syed Kazim Raza Shah", role: "Assistant Executive Director",   department: "Leadership" },
   ],
   "Research & Policy Department": [
-    { name: "Ghazala Ishaq", role: "Head of Research & Policy" },
-    { name: "Maria Aslam",   role: "Research Associate" },
-    { name: "Attia Shamim",  role: "Research Associate" },
+    { name: "Ghazala Ishaq", role: "Head of Research & Policy",            department: "Research & Policy Department" },
+    { name: "Maria Aslam",   role: "Research Associate",                   department: "Research & Policy Department" },
+    { name: "Attia Shamim",  role: "Research Associate",                   department: "Research & Policy Department" },
   ],
   "Internal Affairs Team": [
-    { name: "Zubair Mahar",  role: "Head of Internal Affairs" },
-    { name: "Maryam Akmal",  role: "Internal Affairs Associate" },
-    { name: "Tooba Iqbal",   role: "Internal Affairs Associate" },
+    { name: "Zubair Mahar",  role: "Head of Internal Affairs",             department: "Internal Affairs Team" },
+    { name: "Maryam Akmal",  role: "Internal Affairs Associate",           department: "Internal Affairs Team" },
+    { name: "Tooba Iqbal",   role: "Internal Affairs Associate",           department: "Internal Affairs Team" },
   ],
   "External Affairs Department": [
-    { name: "Syed Umer Akhter", role: "Head of External Affairs" },
-    { name: "Areeba Javed",     role: "External Affairs Associate" },
-    { name: "Simrah Tariq",     role: "External Affairs Associate" },
+    { name: "Syed Umer Akhter", role: "Head of External Affairs",          department: "External Affairs Department" },
+    { name: "Areeba Javed",     role: "External Affairs Associate",        department: "External Affairs Department" },
+    { name: "Simrah Tariq",     role: "External Affairs Associate",        department: "External Affairs Department" },
   ],
   "Creative Content Department": [
-    { name: "Tayyaba Muskan",  role: "Head of Creative Content" },
-    { name: "Qulnasic Fatima", role: "Creative Content Associate" },
-    { name: "Meherma Fatima",  role: "Creative Content Associate" },
+    { name: "Tayyaba Muskan",  role: "Head of Creative Content",           department: "Creative Content Department" },
+    { name: "Qulnasic Fatima", role: "Creative Content Associate",        department: "Creative Content Department" },
+    { name: "Meherma Fatima",  role: "Creative Content Associate",        department: "Creative Content Department" },
   ],
 };
+
+// Flatten static team for fallback array
+const STATIC_FLAT = Object.values(STATIC_TEAM).flat();
 
 const FOCUS_AREAS = [
   "Climate & Environmental Security",
@@ -49,20 +57,42 @@ const APPROACH_STEPS = [
 ];
 
 export default function About() {
+  // Fetch team from Supabase — falls back to static data if DB empty
+  const { data: teamMembers, loading: teamLoading } = useCmsData("team_members", STATIC_FLAT);
+
+  // Group members by department, preserving insertion order
+  const groupedTeam = useMemo(() => {
+    const map = new Map();
+    for (const m of teamMembers) {
+      const dept = m.department || "Leadership";
+      if (!map.has(dept)) map.set(dept, []);
+      map.get(dept).push(m);
+    }
+    return map;
+  }, [teamMembers]);
   return (
     <>
       <PageMeta title="About" description="Mausam Lab is a youth-led climate policy, research, and sustainability platform based in Pakistan." />
 
       {/* Who We Are */}
+      <section className="page-hero">
+        <div className="container">
+          <span className="eyebrow">About</span>
+          <h1>Who We Are</h1>
+          <div className="hero-divider" />
+          <p>
+            Mausam Lab is a youth-led climate policy, research, and sustainability platform based in Pakistan.
+            We work to produce locally grounded knowledge that helps communities, institutions,
+            and decision-makers understand and respond to climate risks.
+          </p>
+        </div>
+      </section>
+
+      {/* Who We Are detail */}
       <section className="section section-alt">
         <div className="container">
           <div style={s.twoCol}>
             <div>
-              <span className="eyebrow">About</span>
-              <h1 style={s.h1}>Who We Are</h1>
-              <p>
-                Mausam Lab is a youth-led climate policy, research, and sustainability platform based in Pakistan.
-              </p>
               <p>
                 We work on climate challenges through research, policy engagement, youth leadership, and practical initiatives. Our focus is producing locally grounded knowledge that helps communities, institutions, and decision-makers understand and respond to climate risks.
               </p>
@@ -72,9 +102,9 @@ export default function About() {
               <p style={s.tagline}>Research-driven · Youth-led · Policy-focused</p>
             </div>
             <div style={s.mapCol}>
-              <div style={s.mapBox}>
-                <p style={s.mapPk}>PK</p>
-                <p style={s.mapLabel}>Pakistan</p>
+              <div style={s.logoBox}>
+                <img src={logo} alt="Mausam Lab" style={s.logoImg} />
+                <p style={s.logoBoxLabel}>Mausam Lab</p>
               </div>
             </div>
           </div>
@@ -84,6 +114,7 @@ export default function About() {
       {/* Mission & Vision */}
       <section className="section">
         <div className="container">
+          <SectionHeader eyebrow="Our Purpose" title="Mission &amp; Vision" />
           <div className="grid grid-2">
             <div style={s.mvCard}>
               <div style={s.mvBar} />
@@ -106,18 +137,7 @@ export default function About() {
       {/* Our Approach */}
       <section className="section section-alt">
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <span className="eyebrow">Our Approach</span>
-            <h2>Mausam Lab works across this continuum</h2>
-            <div style={s.stripRow}>
-              {APPROACH_STEPS.map((step, i) => (
-                <span key={step.label} style={s.stripItem}>
-                  <span style={s.stripPill}>{step.label}</span>
-                  {i < APPROACH_STEPS.length - 1 && <span style={s.stripDivider} aria-hidden="true" />}
-                </span>
-              ))}
-            </div>
-          </div>
+          <SectionHeader eyebrow="Our Approach" title="Mausam Lab Works Across This Continuum" />
           <div className="grid grid-5">
             {APPROACH_STEPS.map(step => (
               <div key={step.label} style={s.approachCard}>
@@ -132,9 +152,8 @@ export default function About() {
       {/* Why Mausam Lab */}
       <section className="section">
         <div className="container">
-          <div style={s.whyInner}>
-            <span className="eyebrow">Why Mausam Lab?</span>
-            <h2>Why Mausam Lab?</h2>
+          <SectionHeader eyebrow="Why Mausam Lab?" title="Why Mausam Lab?" />
+          <div style={s.whyBody}>
             <p>
               Climate challenges are not experienced the same way everywhere. A heatwave in Karachi, water insecurity in Thar, flooding in Sindh, or drought elsewhere in Pakistan involves different risks, needs, and responses.
             </p>
@@ -151,13 +170,7 @@ export default function About() {
       {/* Focus Areas */}
       <section className="section section-alt">
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: 32 }}>
-            <span className="eyebrow">Focus Areas</span>
-            <h2>Our Focus Areas</h2>
-            <p style={s.focusIntro}>
-              Our work spans interconnected climate, environmental, and development challenges. Our focus areas may evolve as our research and programs develop.
-            </p>
-          </div>
+          <SectionHeader eyebrow="Focus Areas" title="Our Focus Areas" description="Our work spans interconnected climate, environmental, and development challenges. Our focus areas may evolve as our research and programs develop." />
           <div style={s.pillGrid}>
             {FOCUS_AREAS.map(area => (
               <span key={area} className="tag">{area}</span>
@@ -169,27 +182,34 @@ export default function About() {
       {/* Our Team */}
       <section className="section">
         <div className="container">
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <span className="eyebrow">Our Team</span>
-            <h2>Our Team</h2>
-            <p style={s.focusIntro}>
-              Mausam Lab is built by young researchers, communicators, and practitioners working across different areas of climate and organisational development.
-            </p>
-          </div>
-          {Object.entries(TEAM).map(([dept, members]) => (
-            <div key={dept} style={s.deptBlock}>
-              <h3 style={s.deptTitle}>{dept}</h3>
-              <div style={s.teamGrid}>
-                {members.map(m => (
-                  <div key={m.name} style={s.teamCard}>
-                    <div style={s.avatar}>{m.name.charAt(0)}</div>
-                    <h4 style={s.memberName}>{m.name}</h4>
-                    <p style={s.memberRole}>{m.role}</p>
+          <SectionHeader eyebrow="Our Team" title="Our Team" description="Mausam Lab is built by young researchers, communicators, and practitioners working across different areas of climate and organisational development." />
+
+          {teamLoading ? (
+            <p style={{ textAlign: "center", color: "var(--color-text-muted)" }}>Loading team…</p>
+          ) : (
+            <>
+              {[...groupedTeam.entries()].map(([dept, members]) => (
+                <div key={dept} style={s.deptBlock}>
+                  <h3 style={s.deptTitle}>{dept}</h3>
+                  <div style={s.teamGrid}>
+                    {members.map(m => (
+                      <div key={m.id || m.name} style={s.teamCard}>
+                        {/* Profile photo — uploaded via admin CMS */}
+                        {m.image_url ? (
+                          <img src={m.image_url} alt={m.name} style={s.memberPhoto} />
+                        ) : (
+                          <div style={s.avatar}>{m.name.charAt(0)}</div>
+                        )}
+                        <h4 style={s.memberName}>{m.name}</h4>
+                        <p style={s.memberRole}>{m.position || m.role}</p>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
-          ))}
+                </div>
+              ))}
+            </>
+          )}
+
           <p style={s.teamClosing}>
             Mausam Lab is designed to grow with the people who contribute to it. As our research, programs, and collaborations expand, our team and areas of work will evolve with them.
           </p>
@@ -203,14 +223,19 @@ const s = {
   twoCol:   { display: "grid", gridTemplateColumns: "60% 1fr", gap: 48, alignItems: "center" },
   h1:       { margin: "4px 0 16px" },
   mapCol:   { display: "flex", justifyContent: "center" },
-  mapBox: {
-    background: "var(--color-primary)", borderRadius: 12,
+  /* Logo box — replaces old PK Pakistan box */
+  logoBox: {
+    background: "var(--color-primary)",
+    borderRadius: 14,
     width: 220, height: 220,
     display: "flex", flexDirection: "column",
-    alignItems: "center", justifyContent: "center", gap: 8,
+    alignItems: "center", justifyContent: "center", gap: 10,
+    padding: 24,
+    boxShadow: "var(--shadow-md)",
   },
-  mapPk:    { color: "#fff", fontFamily: "var(--font-heading)", fontSize: 48, fontWeight: 600, margin: 0, lineHeight: 1 },
-  mapLabel: { color: "rgba(255,255,255,0.75)", fontWeight: 500, fontSize: 14, margin: 0, letterSpacing: "0.08em", textTransform: "uppercase" },
+  logoImg:      { width: 100, height: 100, objectFit: "contain", filter: "brightness(0) invert(1)" },
+  logoBoxLabel: { color: "#fff", fontFamily: "var(--font-heading)", fontWeight: 600, fontSize: 16, margin: 0 },
+  logoBoxSub:   { color: "rgba(255,255,255,0.65)", fontSize: 12, margin: 0, letterSpacing: "0.1em", textTransform: "uppercase" },
   tagline:  { fontWeight: 600, color: "var(--color-primary)", fontSize: 15, letterSpacing: "0.02em", marginTop: 8 },
   mvCard: {
     border: "1px solid var(--color-border)", borderRadius: "var(--radius)",
@@ -233,33 +258,51 @@ const s = {
   },
   approachTitle: { color: "var(--color-primary)", fontWeight: 600, marginBottom: 8, fontSize: 15 },
   approachDesc:  { color: "var(--color-text-muted)", fontSize: 14, lineHeight: 1.6, margin: 0 },
-  whyInner:      { maxWidth: 780, margin: "0 auto" },
+  whyBody:       { maxWidth: 700, margin: "0 auto", textAlign: "center" },
   focusIntro:    { color: "var(--color-text-muted)", maxWidth: 640, margin: "0 auto" },
   pillGrid:      { display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "center" },
-  deptBlock:     { marginBottom: 48 },
+  deptBlock:     { marginBottom: 56 },
   deptTitle: {
     color: "var(--color-primary)", fontWeight: 600, fontSize: 18,
     borderBottom: "2px solid var(--color-accent)", paddingBottom: 8,
-    marginBottom: 24, display: "inline-block",
+    marginBottom: 28, display: "inline-block",
   },
   teamGrid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
-    gap: 20, justifyItems: "center",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: 20,
+    justifyContent: "center",
   },
   teamCard: {
-    background: "var(--color-surface)", border: "1px solid var(--color-border)",
-    borderRadius: "var(--radius)", padding: "24px 16px",
-    textAlign: "center", width: "100%", boxShadow: "var(--shadow-sm)",
+    background: "var(--color-surface)",
+    border: "1px solid var(--color-border)",
+    borderRadius: "var(--radius)",
+    padding: "28px 20px 20px",
+    textAlign: "center",
+    width: 190,
+    flexShrink: 0,
+    boxShadow: "var(--shadow-sm)",
+    transition: "box-shadow 0.15s, transform 0.15s",
   },
+  /* Profile photo — shown when image uploaded via CMS */
+  memberPhoto: {
+    width: 88, height: 88, borderRadius: "50%",
+    objectFit: "cover",
+    margin: "0 auto 14px",
+    display: "block",
+    border: "3px solid var(--color-neutral-light)",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
+  },
+  /* Fallback initial avatar */
   avatar: {
-    width: 56, height: 56, borderRadius: "50%",
+    width: 88, height: 88, borderRadius: "50%",
     background: "var(--color-primary)", color: "#fff",
     display: "flex", alignItems: "center", justifyContent: "center",
-    fontSize: 22, fontWeight: 700, margin: "0 auto 12px",
+    fontSize: 28, fontWeight: 700, margin: "0 auto 14px",
     fontFamily: "var(--font-heading)",
   },
-  memberName:   { color: "var(--color-primary)", fontSize: 14, fontWeight: 600, margin: "0 0 4px" },
-  memberRole:   { color: "var(--color-text-muted)", fontSize: 13, margin: 0, lineHeight: 1.4 },
-  teamClosing:  { textAlign: "center", color: "var(--color-text-muted)", fontSize: 14, maxWidth: 600, margin: "16px auto 0", fontStyle: "italic" },
+  memberName:   { color: "var(--color-primary)", fontSize: 14, fontWeight: 600, margin: "0 0 5px", lineHeight: 1.3 },
+  memberRole:   { color: "var(--color-text-muted)", fontSize: 12, margin: 0, lineHeight: 1.5 },
+  memberDept:   { color: "var(--color-accent)", fontSize: 11, margin: "4px 0 0", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.04em" },
+  teamClosing:  { textAlign: "center", color: "var(--color-text-muted)", fontSize: 14, maxWidth: 600, margin: "24px auto 0", fontStyle: "italic" },
 };

@@ -251,11 +251,48 @@ select:focus-visible {
 .page-hero {
   background: var(--color-primary);
   color: #fff;
-  padding: 64px 0;
+  padding: 72px 0;
+  text-align: center;
 }
-.page-hero h1   { color: #fff; margin-bottom: var(--space-2); }
-.page-hero p    { color: rgba(255,255,255,0.85); font-size: 17px; max-width: 700px; margin-bottom: 0; }
-.page-hero .eyebrow { color: var(--color-accent-light); }
+.page-hero .container { display: flex; flex-direction: column; align-items: center; }
+.page-hero h1   {
+  color: #fff;
+  margin-bottom: 0;
+  max-width: 760px;
+}
+.page-hero .hero-divider {
+  width: 60px; height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  margin: 20px auto 20px;
+}
+.page-hero p    {
+  color: rgba(255,255,255,0.85);
+  font-size: 17px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.page-hero .eyebrow { color: var(--color-accent-light); margin-bottom: 12px; }
+
+/* ── Section heading style (centered with accent underline) ──────────────── */
+.sec-heading {
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+.sec-heading .eyebrow { display: block; margin-bottom: 8px; }
+.sec-heading h2 { margin-bottom: 0; }
+.sec-heading .sec-divider {
+  width: 50px; height: 3px;
+  background: var(--color-accent);
+  border-radius: 2px;
+  margin: 16px auto 0;
+}
+.sec-heading p {
+  color: var(--color-text-muted);
+  max-width: 640px;
+  margin: 14px auto 0;
+  font-size: 16px;
+}
 
 /* ── Process strip ────────────────────────────────────────────────────────── */
 .process-strip {

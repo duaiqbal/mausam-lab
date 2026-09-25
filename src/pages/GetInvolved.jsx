@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PageMeta from "./PageMeta";
+import SectionHeader from "../components/SectionHeader";
 
 /* ── Panel data ───────────────────────────────────────────────────────────── */
 const PANELS = {
@@ -242,7 +243,8 @@ export default function GetInvolved() {
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow">Get Involved</span>
-          <h1>Be part of the work.</h1>
+          <h1>Be Part of the Work</h1>
+          <div className="hero-divider" />
           <p>
             Mausam Lab works with young researchers, students, universities, organizations,
             practitioners, and institutions to build knowledge and create practical responses to
@@ -255,10 +257,7 @@ export default function GetInvolved() {
       {/* Join Mausam Lab */}
       <section className="section section-alt">
         <div className="container">
-          <div style={s.sectionHead}>
-            <span className="eyebrow">Join Mausam Lab</span>
-            <h2>Join Mausam Lab</h2>
-          </div>
+          <SectionHeader eyebrow="Join Mausam Lab" title="Join Mausam Lab" />
           <div className="grid grid-4">
             <InvolveCard title="Volunteer" desc="Contribute your time, skills, and ideas to Mausam Lab's research, programs, communications, and initiatives." panelKey="volunteer" onOpen={setActivePanel} />
             <InvolveCard title="Research Opportunities" desc="Take part in research projects, writing initiatives, and other opportunities to develop and contribute to climate research." panelKey="research" onOpen={setActivePanel} />
@@ -271,11 +270,7 @@ export default function GetInvolved() {
       {/* Collaborate */}
       <section className="section">
         <div className="container">
-          <div style={s.sectionHead}>
-            <span className="eyebrow">Collaborate With Us</span>
-            <h2>Collaborate With Us</h2>
-            <p style={s.sectionIntro}>We welcome collaborations that contribute to meaningful research, learning, policy engagement, and climate action.</p>
-          </div>
+          <SectionHeader eyebrow="Collaborate With Us" title="Collaborate With Us" description="We welcome collaborations that contribute to meaningful research, learning, policy engagement, and climate action." />
           <div className="grid grid-4">
             <InvolveCard title="Research Collaboration" desc="Work with us on research projects, publications, field studies, and knowledge production." panelKey="researchCollab" onOpen={setActivePanel} />
             <InvolveCard title="Institutional Collaboration" desc="Partner with Mausam Lab on research, learning, youth engagement, and climate initiatives." panelKey="institutional" onOpen={setActivePanel} />
@@ -304,11 +299,7 @@ export default function GetInvolved() {
       {/* Contribute */}
       <section className="section section-alt">
         <div className="container">
-          <div style={s.sectionHead}>
-            <span className="eyebrow">Contribute</span>
-            <h2>Contribute</h2>
-            <p style={s.sectionIntro}>Have research, ideas, or resources that could contribute to the climate conversation?</p>
-          </div>
+          <SectionHeader eyebrow="Contribute" title="Contribute" description="Have research, ideas, or resources that could contribute to the climate conversation?" />
           <div className="grid grid-4">
             <InvolveCard title="Submit an Article" desc="Share an article or analysis for consideration." panelKey="submitArticle" onOpen={setActivePanel} />
             <InvolveCard title="Contribute Research" desc="Propose research or contribute to an ongoing research initiative." panelKey="contributeResearch" onOpen={setActivePanel} />

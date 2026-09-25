@@ -50,7 +50,8 @@ export default function Contact() {
       <section className="page-hero" style={{ padding: "64px 0" }}>
         <div className="container">
           <span className="eyebrow">Contact</span>
-          <h1>Let's connect.</h1>
+          <h1>Let's Connect</h1>
+          <div className="hero-divider" />
           <p>
             For questions, collaborations, partnerships, media inquiries, or general information,
             reach out to Mausam Lab.

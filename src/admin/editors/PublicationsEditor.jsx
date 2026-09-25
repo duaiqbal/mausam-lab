@@ -6,10 +6,11 @@ import Field, { Input, Textarea, Select } from "../ui/Field";
 import ImageUpload from "../ui/ImageUpload";
 import SaveBar from "../ui/SaveBar";
 
-const TYPES = ["Policy Briefs", "Reports", "Published Research"];
+// Single source of truth — same 7 types used in CMS and public website
+const TYPES = ["Research", "Policy Brief", "Article", "Commentary", "Explainer", "Report", "Guide"];
 
 const EMPTY = {
-  title: "", type: "Policy Briefs", author: "", date: "",
+  title: "", type: "Research", author: "", date: "",
   description: "", download_url: "", image_url: "", sort_order: 0,
 };
 
@@ -63,7 +64,7 @@ export default function PublicationsEditor() {
       <div style={hdr}>
         <div>
           <h1 style={h1}>Publications</h1>
-          <p style={sub}>Policy briefs, reports, and published research.</p>
+          <p style={sub}>Research, policy briefs, articles, commentaries, explainers, reports, and guides.</p>
         </div>
         <button onClick={openAdd} style={addBtn}>+ Add publication</button>
       </div>

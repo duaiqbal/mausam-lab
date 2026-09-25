@@ -47,7 +47,8 @@ export default function Publications() {
       <section className="page-hero">
         <div className="container">
           <span className="eyebrow">Publications</span>
-          <h1>Knowledge for climate action.</h1>
+          <h1>Knowledge for Climate Action</h1>
+          <div className="hero-divider" />
           <p>
             Explore research, policy work, analysis, and practical resources produced by Mausam Lab.
             Our publications examine climate and sustainability challenges through locally grounded
