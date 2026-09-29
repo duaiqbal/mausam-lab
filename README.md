@@ -113,32 +113,6 @@ backend. Before launch, connect it to a simple form service (e.g. Formspree,
 Getform) or a small serverless function, and update the `handleSubmit`
 function in `src/pages/Contact.jsx`.
 
-## Deployment
 
-This is a static site, so any free static host works. Two beginner-friendly
-options:
 
-### Option A - Netlify (drag and drop)
-1. Run `npm run build`.
-2. Go to app.netlify.com/drop.
-3. Drag the generated `dist` folder onto the page.
-4. Netlify gives you a live URL immediately.
 
-### Option B - Vercel
-1. Push this project to a GitHub repository.
-2. Go to vercel.com, sign in, and "Import" the repository.
-3. Framework preset: Vite. Build command: `npm run build`. Output
-   directory: `dist`.
-4. Deploy - Vercel gives you a live URL and redeploys automatically on
-   every push.
-
-Both are free for a project this size and require no credit card for basic use.
-
-## Notes
-
-- All placeholder content is explicitly labeled ("Sample / Placeholder",
-  `[Add ...]`, etc.) throughout `src/data/` so it is never mistaken for real
-  Mausam Lab information.
-- The site is responsive (desktop, tablet, mobile) and includes basic
-  accessibility features: semantic HTML, a skip-to-content link, visible
-  keyboard focus states, and labeled form fields.
