@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
+import "./Footer.css";
 
 export default function Footer() {
   return (
     <footer style={s.footer}>
-      <div className="container" style={s.inner}>
+      <div className="container footer-inner" style={s.inner}>
         {/* Col 1 — Brand */}
         <div>
           <div style={s.brand}>

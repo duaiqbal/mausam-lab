@@ -1,6 +1,8 @@
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { NavLink, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import logo from "../assets/logo.png";
+import "./AdminLayout.css";
 
 const NAV = [
   { to: "/admin",               label: "Dashboard",     icon: "🏠", end: true },
@@ -17,6 +19,11 @@ const NAV = [
 export default function AdminLayout() {
   const { session, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [open, setOpen] = useState(false);
+
+  // Close the drawer whenever the route changes (mobile)
+  useEffect(() => { setOpen(false); }, [location]);
 
   async function handleSignOut() {
     await signOut();
@@ -24,9 +31,30 @@ export default function AdminLayout() {
   }
 
   return (
-    <div style={s.shell}>
-      {/* ── Sidebar ── */}
-      <aside style={s.sidebar}>
+    <div className="admin-shell">
+      {/* ── Mobile top bar ── */}
+      <div className="admin-topbar">
+        <button
+          className="admin-hamburger"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span /><span /><span />
+        </button>
+        <img src={logo} alt="" height={26} />
+        <span className="admin-topbar-title">Mausam Lab CMS</span>
+      </div>
+
+      {/* ── Backdrop (mobile, when drawer open) ── */}
+      <div
+        className={`admin-backdrop ${open ? "is-open" : ""}`}
+        onClick={() => setOpen(false)}
+        aria-hidden="true"
+      />
+
+      {/* ── Sidebar / drawer ── */}
+      <aside className={`admin-sidebar ${open ? "is-open" : ""}`}>
         <div style={s.sideTop}>
           <div style={s.brand}>
             <img src={logo} alt="" height={32} />
@@ -63,7 +91,7 @@ export default function AdminLayout() {
       </aside>
 
       {/* ── Main content area ── */}
-      <main style={s.main}>
+      <main className="admin-main">
         <Outlet />
       </main>
     </div>
@@ -71,25 +99,6 @@ export default function AdminLayout() {
 }
 
 const s = {
-  shell: {
-    display: "flex",
-    minHeight: "100vh",
-    fontFamily: "'Inter','Segoe UI',system-ui,sans-serif",
-    background: "#f5f8f6",
-  },
-  sidebar: {
-    width: 240,
-    minWidth: 240,
-    background: "#1f5b4c",
-    color: "#fff",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-    position: "sticky",
-    top: 0,
-    height: "100vh",
-    overflowY: "auto",
-  },
   sideTop: { padding: "1.5rem 0 1rem" },
   brand: {
     display: "flex",
@@ -140,11 +149,5 @@ const s = {
     fontSize: "0.82rem",
     cursor: "pointer",
     fontFamily: "inherit",
-  },
-  main: {
-    flex: 1,
-    padding: "2rem 2.25rem",
-    overflowY: "auto",
-    maxWidth: "calc(100vw - 240px)",
   },
 };
