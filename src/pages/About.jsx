@@ -3,6 +3,7 @@ import PageMeta from "./PageMeta";
 import SectionHeader from "../components/SectionHeader";
 import logo from "../assets/logo.png";
 import { useCmsData } from "../lib/useCmsData";
+import "./About.css";
 
 // Static fallback — only shown if Supabase has no data yet
 const STATIC_TEAM = {
@@ -91,7 +92,7 @@ export default function About() {
       {/* Who We Are detail */}
       <section className="section section-alt">
         <div className="container">
-          <div style={s.twoCol}>
+          <div className="about-twocol" style={s.twoCol}>
             <div>
               <p>
                 We work on climate challenges through research, policy engagement, youth leadership, and practical initiatives. Our focus is producing locally grounded knowledge that helps communities, institutions, and decision-makers understand and respond to climate risks.
@@ -101,7 +102,7 @@ export default function About() {
               </p>
               <p style={s.tagline}>Research-driven · Youth-led · Policy-focused</p>
             </div>
-            <div style={s.mapCol}>
+            <div className="about-logocol" style={s.mapCol}>
               <div style={s.logoBox}>
                 <img src={logo} alt="Mausam Lab" style={s.logoImg} />
                 <p style={s.logoBoxLabel}>Mausam Lab</p>

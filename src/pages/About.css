@@ -1,0 +1,15 @@
+/* About page — responsive overrides.
+   Base (desktop) styles live inline in About.jsx; these only adjust mobile. */
+
+@media (max-width: 760px) {
+  /* Stack the "Who We Are" text + logo box into one column on mobile */
+  .about-twocol {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Center the logo box under the text */
+  .about-logocol {
+    justify-content: center !important;
+  }
+}
