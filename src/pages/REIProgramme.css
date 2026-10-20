@@ -1,0 +1,15 @@
+/* REI Programme page — responsive overrides.
+   Base (desktop) styles are inline in REIProgramme.jsx; these only adjust mobile. */
+
+@media (max-width: 860px) {
+  /* Stack the main body and the "at a glance" sidebar into one column */
+  .rei-layout {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+
+  /* Sidebar should no longer stick once it sits below the content */
+  .rei-sidebar {
+    position: static !important;
+  }
+}

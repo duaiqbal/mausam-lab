@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PageMeta from "./PageMeta";
+import "./REIProgramme.css";
 
 const TRACKS = [
   {
@@ -94,7 +95,7 @@ export default function REIProgramme() {
       {/* ── Body + Sidebar ── */}
       <section className="section">
         <div className="container">
-          <div style={s.layout}>
+          <div className="rei-layout" style={s.layout}>
 
             {/* ── Main body ── */}
             <div style={s.body}>
@@ -194,7 +195,7 @@ export default function REIProgramme() {
             </div>
 
             {/* ── Sidebar ── */}
-            <aside style={s.sidebar}>
+            <aside className="rei-sidebar" style={s.sidebar}>
               <div style={s.glanceCard}>
                 <h3 style={s.glanceTitle}>Programme at a Glance</h3>
                 {GLANCE.map(row => (
