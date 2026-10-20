@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageMeta from "./PageMeta";
+import "./Contact.css";
 
 const INTEREST_OPTIONS = [
   "Research collaboration",
@@ -62,7 +63,7 @@ export default function Contact() {
       {/* Contact Details */}
       <section className="section section-alt">
         <div className="container">
-          <div style={s.detailsGrid}>
+          <div className="contact-details-grid" style={s.detailsGrid}>
             <div style={s.detailCard}>
               <p style={s.detailLabel}>Email</p>
               <a href="mailto:mausamlab@gmail.com" style={s.detailLink}>mausamlab@gmail.com</a>

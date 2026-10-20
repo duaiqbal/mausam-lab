@@ -55,3 +55,19 @@
 @media (max-width: 760px) {
   .contact-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Contact detail cards (Email / WhatsApp / Connect) ─────────────────────
+   Base 3-column grid is set inline in Contact.jsx; stack it on smaller screens
+   so the third card never overflows the viewport. */
+@media (max-width: 860px) {
+  .contact-details-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .contact-details-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
