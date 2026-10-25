@@ -9,7 +9,7 @@ export default function RequireAuth({ children }) {
   if (session === undefined) {
     return (
       <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <span style={{ color: "#1f5b4c", fontFamily: "Inter,system-ui,sans-serif" }}>Loading…</span>
+        <span style={{ color: "#00357A", fontFamily: "Inter,system-ui,sans-serif" }}>Loading…</span>
       </div>
     );
   }

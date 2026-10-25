@@ -59,7 +59,7 @@ export default function AdminLogin() {
         {notConfigured && (
           <div style={s.setupBanner}>
             <strong style={{ display: "block", marginBottom: 6 }}>
-              ⚠️ Supabase not connected yet
+              Supabase not connected yet
             </strong>
             To finish setup, you need to:
             <ol style={s.setupList}>
@@ -137,14 +137,14 @@ const s = {
     display: "flex",
     alignItems: "flex-start",
     justifyContent: "center",
-    background: "#f5f8f6",
+    background: "#EAE3DE",
     fontFamily: "'Inter','Segoe UI',system-ui,sans-serif",
     padding: "3rem 1rem",
   },
   card: {
     background: "#fff",
     borderRadius: 14,
-    boxShadow: "0 6px 32px rgba(28,38,34,0.10)",
+    boxShadow: "0 6px 32px rgba(34,38,31,0.10)",
     padding: "2.5rem 2.25rem",
     width: "100%",
     maxWidth: 480,
@@ -155,9 +155,9 @@ const s = {
     gap: 10,
     marginBottom: "1.5rem",
   },
-  wordmark: { fontWeight: 700, fontSize: "1.1rem", color: "#1f5b4c" },
-  heading:  { margin: "0 0 0.25rem", fontSize: "1.6rem", color: "#1f5b4c" },
-  sub:      { margin: "0 0 1.25rem", color: "#5b6b63", fontSize: "0.9rem" },
+  wordmark: { fontWeight: 700, fontSize: "1.1rem", color: "#00357A" },
+  heading:  { margin: "0 0 0.25rem", fontSize: "1.6rem", color: "#00357A" },
+  sub:      { margin: "0 0 1.25rem", color: "#5C5F58", fontSize: "0.9rem" },
 
   setupBanner: {
     background: "#fff8e6",
@@ -170,29 +170,29 @@ const s = {
     lineHeight: 1.6,
   },
   setupList: { margin: "8px 0 0 0", paddingLeft: 18, lineHeight: 2 },
-  link:  { color: "#1f5b4c", fontWeight: 600 },
-  code:  { background: "#f0f4f2", borderRadius: 4, padding: "1px 5px", fontSize: "0.82rem", fontFamily: "monospace" },
-  pre:   { background: "#f0f4f2", borderRadius: 6, padding: "0.5rem 0.75rem", fontSize: "0.78rem", fontFamily: "monospace", margin: "4px 0 0", whiteSpace: "pre-wrap" },
+  link:  { color: "#00357A", fontWeight: 600 },
+  code:  { background: "#EFEAE5", borderRadius: 4, padding: "1px 5px", fontSize: "0.82rem", fontFamily: "monospace" },
+  pre:   { background: "#EFEAE5", borderRadius: 6, padding: "0.5rem 0.75rem", fontSize: "0.78rem", fontFamily: "monospace", margin: "4px 0 0", whiteSpace: "pre-wrap" },
 
   form:  { display: "flex", flexDirection: "column", gap: "0.5rem" },
-  label: { fontSize: "0.85rem", fontWeight: 600, color: "#1c2622", marginBottom: 2 },
+  label: { fontSize: "0.85rem", fontWeight: 600, color: "#22261F", marginBottom: 2 },
   input: {
     padding: "0.65rem 0.9rem",
     borderRadius: 8,
-    border: "1.5px solid #dfe7e2",
+    border: "1.5px solid #D9D3CB",
     fontSize: "0.95rem",
     outline: "none",
     marginBottom: "0.75rem",
     fontFamily: "inherit",
     width: "100%",
     boxSizing: "border-box",
-    color: "#1c2622",
+    color: "#22261F",
   },
   inputDisabled: { background: "#f5f5f5", color: "#aaa", cursor: "not-allowed" },
   btn: {
     marginTop: "0.5rem",
     padding: "0.75rem",
-    background: "#1f5b4c",
+    background: "#00357A",
     color: "#fff",
     border: "none",
     borderRadius: 8,
@@ -201,7 +201,7 @@ const s = {
     cursor: "pointer",
     fontFamily: "inherit",
   },
-  btnDisabled: { background: "#9db8b1", cursor: "not-allowed" },
+  btnDisabled: { background: "#8099BD", cursor: "not-allowed" },
   error: {
     color: "#c0392b",
     fontSize: "0.875rem",

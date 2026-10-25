@@ -5,15 +5,15 @@ import logo from "../assets/logo.png";
 import "./AdminLayout.css";
 
 const NAV = [
-  { to: "/admin",               label: "Dashboard",     icon: "🏠", end: true },
-  { to: "/admin/research",      label: "Research",      icon: "🔬" },
-  { to: "/admin/publications",  label: "Publications",  icon: "📄" },
-  { to: "/admin/initiatives",   label: "Initiatives",   icon: "🌱" },
-  { to: "/admin/projects",      label: "Projects",      icon: "📁" },
-  { to: "/admin/team",          label: "Team",          icon: "👥" },
-  { to: "/admin/opportunities", label: "Opportunities", icon: "🎯" },
-  { to: "/admin/skills",        label: "Mausam Skills",  icon: "📘" },
-  { to: "/admin/site",          label: "Brand & About", icon: "⚙️" },
+  { to: "/admin",               label: "Dashboard", end: true },
+  { to: "/admin/research",      label: "Research" },
+  { to: "/admin/publications",  label: "Publications" },
+  { to: "/admin/initiatives",   label: "Initiatives" },
+  { to: "/admin/projects",      label: "Projects" },
+  { to: "/admin/team",          label: "Team" },
+  { to: "/admin/opportunities", label: "Opportunities" },
+  { to: "/admin/skills",        label: "Mausam Skills" },
+  { to: "/admin/site",          label: "Brand & About" },
 ];
 
 export default function AdminLayout() {
@@ -42,7 +42,7 @@ export default function AdminLayout() {
         >
           <span /><span /><span />
         </button>
-        <img src={logo} alt="" height={26} />
+        <img src={logo} alt="" height={26} style={{ filter: "brightness(0) invert(1)" }} />
         <span className="admin-topbar-title">Mausam Lab CMS</span>
       </div>
 
@@ -57,7 +57,7 @@ export default function AdminLayout() {
       <aside className={`admin-sidebar ${open ? "is-open" : ""}`}>
         <div style={s.sideTop}>
           <div style={s.brand}>
-            <img src={logo} alt="" height={32} />
+            <img src={logo} alt="" height={32} style={{ filter: "brightness(0) invert(1)" }} />
             <div>
               <div style={s.brandName}>Mausam Lab</div>
               <div style={s.brandSub}>CMS Admin</div>
@@ -75,7 +75,6 @@ export default function AdminLayout() {
                   ...(isActive ? s.navLinkActive : {}),
                 })}
               >
-                <span style={{ fontSize: "1rem" }}>{item.icon}</span>
                 {item.label}
               </NavLink>
             ))}

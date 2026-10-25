@@ -105,7 +105,7 @@ export default function SiteEditor() {
           <p style={sub}>Controls site-wide brand info and the entire About page.</p>
         </div>
         <button onClick={save} disabled={saving} style={saveBtn}>
-          {saving ? "Saving…" : saved ? "✓ Saved" : "Save all changes"}
+          {saving ? "Saving…" : saved ? "Saved" : "Save all changes"}
         </button>
       </div>
       {error && <p style={errStyle}>{error}</p>}
@@ -212,7 +212,7 @@ export default function SiteEditor() {
 
       <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "flex-end" }}>
         <button onClick={save} disabled={saving} style={saveBtn}>
-          {saving ? "Saving…" : saved ? "✓ Saved" : "Save all changes"}
+          {saving ? "Saving…" : saved ? "Saved" : "Save all changes"}
         </button>
       </div>
     </div>
@@ -220,16 +220,16 @@ export default function SiteEditor() {
 }
 
 function Section({ children }) {
-  return <div style={{ background: "#fff", borderRadius: 12, padding: "1.5rem", boxShadow: "0 2px 8px rgba(28,38,34,0.07)", marginTop: "1rem" }}>{children}</div>;
+  return <div style={{ background: "#fff", borderRadius: 12, padding: "1.5rem", boxShadow: "0 2px 8px rgba(34,38,31,0.07)", marginTop: "1rem" }}>{children}</div>;
 }
 
 const hdr      = { display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: "0.5rem" };
-const h1       = { margin: 0, fontSize: "1.6rem", color: "#1f5b4c" };
-const sub      = { margin: "0.25rem 0 0", color: "#5b6b63", fontSize: "0.875rem" };
-const saveBtn  = { padding: "0.55rem 1.4rem", background: "#1f5b4c", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
+const h1       = { margin: 0, fontSize: "1.6rem", color: "#00357A" };
+const sub      = { margin: "0.25rem 0 0", color: "#5C5F58", fontSize: "0.875rem" };
+const saveBtn  = { padding: "0.55rem 1.4rem", background: "#00357A", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
 const errStyle = { color: "#c0392b", fontSize: "0.8rem", background: "#fdf2f2", border: "1px solid #f5c6c6", borderRadius: 6, padding: "0.4rem 0.75rem", marginBottom: "1rem" };
-const sectionH3 = { fontSize: "1rem", color: "#1f5b4c", margin: "1.5rem 0 0.75rem", borderTop: "1px solid #dfe7e2", paddingTop: "1rem" };
+const sectionH3 = { fontSize: "1rem", color: "#00357A", margin: "1.5rem 0 0.75rem", borderTop: "1px solid #D9D3CB", paddingTop: "1rem" };
 const tabRow   = { display: "flex", gap: 6, flexWrap: "wrap", marginTop: "1rem" };
-const tabBtn   = { padding: "0.45rem 1rem", borderRadius: 7, border: "1.5px solid #dfe7e2", background: "#fff", cursor: "pointer", fontFamily: "inherit", fontSize: "0.82rem", color: "#5b6b63" };
-const tabActive = { background: "#1f5b4c", color: "#fff", borderColor: "#1f5b4c", fontWeight: 700 };
-const jsonExample = { fontSize: "0.78rem", color: "#5b6b63", background: "#f5f8f6", border: "1px solid #dfe7e2", borderRadius: 6, padding: "0.5rem 0.75rem", marginTop: "0.5rem", whiteSpace: "pre" };
+const tabBtn   = { padding: "0.45rem 1rem", borderRadius: 7, border: "1.5px solid #D9D3CB", background: "#fff", cursor: "pointer", fontFamily: "inherit", fontSize: "0.82rem", color: "#5C5F58" };
+const tabActive = { background: "#00357A", color: "#fff", borderColor: "#00357A", fontWeight: 700 };
+const jsonExample = { fontSize: "0.78rem", color: "#5C5F58", background: "#EAE3DE", border: "1px solid #D9D3CB", borderRadius: 6, padding: "0.5rem 0.75rem", marginTop: "0.5rem", whiteSpace: "pre" };

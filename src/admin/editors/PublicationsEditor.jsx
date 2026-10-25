@@ -154,10 +154,10 @@ export default function PublicationsEditor() {
 }
 
 const hdr      = { display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: "0.5rem" };
-const h1       = { margin: 0, fontSize: "1.6rem", color: "#1f5b4c" };
-const sub      = { margin: "0.25rem 0 0", color: "#5b6b63", fontSize: "0.875rem" };
-const addBtn   = { padding: "0.55rem 1.25rem", background: "#1f5b4c", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
+const h1       = { margin: 0, fontSize: "1.6rem", color: "#00357A" };
+const sub      = { margin: "0.25rem 0 0", color: "#5C5F58", fontSize: "0.875rem" };
+const addBtn   = { padding: "0.55rem 1.25rem", background: "#00357A", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
 const errStyle = { color: "#c0392b", fontSize: "0.8rem", background: "#fdf2f2", border: "1px solid #f5c6c6", borderRadius: 6, padding: "0.4rem 0.75rem" };
-const dividerStyle = { borderTop: "1px solid #dfe7e2", margin: "1.25rem 0 1rem", position: "relative", textAlign: "center" };
-const dividerLabel = { fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#5b6b63", background: "#fff", padding: "0 8px", position: "relative", top: -9 };
-const wordCount    = { fontSize: "0.72rem", color: "#5b6b63", display: "block", textAlign: "right", marginTop: 4 };
+const dividerStyle = { borderTop: "1px solid #D9D3CB", margin: "1.25rem 0 1rem", position: "relative", textAlign: "center" };
+const dividerLabel = { fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: "#5C5F58", background: "#fff", padding: "0 8px", position: "relative", top: -9 };
+const wordCount    = { fontSize: "0.72rem", color: "#5C5F58", display: "block", textAlign: "right", marginTop: 4 };

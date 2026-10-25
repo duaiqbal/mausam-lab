@@ -104,7 +104,7 @@ export default function TeamEditor() {
 }
 
 const hdr    = { display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: "0.5rem" };
-const h1     = { margin: 0, fontSize: "1.6rem", color: "#1f5b4c" };
-const sub    = { margin: "0.25rem 0 0", color: "#5b6b63", fontSize: "0.875rem" };
-const addBtn = { padding: "0.55rem 1.25rem", background: "#1f5b4c", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
+const h1     = { margin: 0, fontSize: "1.6rem", color: "#00357A" };
+const sub    = { margin: "0.25rem 0 0", color: "#5C5F58", fontSize: "0.875rem" };
+const addBtn = { padding: "0.55rem 1.25rem", background: "#00357A", color: "#fff", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontFamily: "inherit", fontSize: "0.88rem", whiteSpace: "nowrap" };
 const errStyle = { color: "#c0392b", fontSize: "0.8rem", background: "#fdf2f2", border: "1px solid #f5c6c6", borderRadius: 6, padding: "0.4rem 0.75rem" };

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
 const SECTIONS = [
-  { label: "Research articles", table: "research",           to: "/admin/research",      icon: "🔬" },
-  { label: "Publications",      table: "publications",       to: "/admin/publications",  icon: "📄" },
-  { label: "Initiatives",       table: "initiatives",        to: "/admin/initiatives",   icon: "🌱" },
-  { label: "Projects",          table: "projects",           to: "/admin/projects",      icon: "📁" },
-  { label: "Team members",      table: "team_members",       to: "/admin/team",          icon: "👥" },
-  { label: "Opportunities",     table: "opportunities",      to: "/admin/opportunities", icon: "🎯" },
-  { label: "Skills categories", table: "skills_categories",  to: "/admin/skills",        icon: "📘" },
+  { label: "Research articles", table: "research",           to: "/admin/research" },
+  { label: "Publications",      table: "publications",       to: "/admin/publications" },
+  { label: "Initiatives",       table: "initiatives",        to: "/admin/initiatives" },
+  { label: "Projects",          table: "projects",           to: "/admin/projects" },
+  { label: "Team members",      table: "team_members",       to: "/admin/team" },
+  { label: "Opportunities",     table: "opportunities",      to: "/admin/opportunities" },
+  { label: "Skills categories", table: "skills_categories",  to: "/admin/skills" },
 ];
 
 export default function AdminDashboard() {
@@ -37,9 +37,8 @@ export default function AdminDashboard() {
       <p style={s.sub}>Welcome to the Mausam Lab CMS. Select a section below to manage content.</p>
 
       <div style={s.grid}>
-        {SECTIONS.map(({ label, table, to, icon }) => (
+        {SECTIONS.map(({ label, table, to }) => (
           <Link key={table} to={to} style={s.card}>
-            <span style={s.icon}>{icon}</span>
             <div>
               <div style={s.cardLabel}>{label}</div>
               <div style={s.cardCount}>
@@ -50,7 +49,6 @@ export default function AdminDashboard() {
         ))}
 
         <Link to="/admin/site" style={s.card}>
-          <span style={s.icon}>⚙️</span>
           <div>
             <div style={s.cardLabel}>Brand &amp; About</div>
             <div style={s.cardCount}>Site-wide settings</div>
@@ -60,7 +58,7 @@ export default function AdminDashboard() {
 
       <div style={s.infoBox}>
         <strong>How it works:</strong> Any change you save here is written directly to Supabase and appears on the live website at{" "}
-        <a href="https://mausam-lab.vercel.app" target="_blank" rel="noreferrer" style={{ color: "#1f5b4c" }}>
+        <a href="https://mausam-lab.vercel.app" target="_blank" rel="noreferrer" style={{ color: "#00357A" }}>
           mausam-lab.vercel.app
         </a>{" "}
         immediately — no redeploy needed.
@@ -70,8 +68,8 @@ export default function AdminDashboard() {
 }
 
 const s = {
-  heading: { margin: "0 0 0.25rem", fontSize: "1.75rem", color: "#1f5b4c" },
-  sub:     { margin: "0 0 2rem", color: "#5b6b63", fontSize: "0.95rem" },
+  heading: { margin: "0 0 0.25rem", fontSize: "1.75rem", color: "#00357A" },
+  sub:     { margin: "0 0 2rem", color: "#5C5F58", fontSize: "0.95rem" },
   grid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))",
@@ -82,25 +80,25 @@ const s = {
     background: "#fff",
     borderRadius: 12,
     padding: "1.25rem 1.1rem",
-    boxShadow: "0 2px 8px rgba(28,38,34,0.07)",
+    boxShadow: "0 2px 8px rgba(34,38,31,0.07)",
     display: "flex",
     alignItems: "center",
     gap: 14,
     textDecoration: "none",
-    color: "#1c2622",
-    border: "1.5px solid #dfe7e2",
+    color: "#22261F",
+    border: "1.5px solid #D9D3CB",
     transition: "box-shadow 0.15s, border-color 0.15s",
   },
   icon:      { fontSize: "1.6rem" },
-  cardLabel: { fontWeight: 700, fontSize: "0.9rem", color: "#1f5b4c" },
-  cardCount: { fontSize: "0.8rem", color: "#5b6b63", marginTop: 2 },
+  cardLabel: { fontWeight: 700, fontSize: "0.9rem", color: "#00357A" },
+  cardCount: { fontSize: "0.8rem", color: "#5C5F58", marginTop: 2 },
   infoBox: {
-    background: "#e8f5f1",
-    border: "1px solid #b2d8cc",
+    background: "#E6EDF7",
+    border: "1px solid #B3C5E0",
     borderRadius: 10,
     padding: "1rem 1.25rem",
     fontSize: "0.88rem",
-    color: "#1c2622",
+    color: "#22261F",
     maxWidth: 620,
   },
 };

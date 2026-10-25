@@ -13,15 +13,15 @@ export default function SaveBar({ onSave, onCancel, saving, saveLabel = "Save", 
 const s = {
   bar: {
     display: "flex", justifyContent: "flex-end", gap: 10,
-    marginTop: "1.5rem", paddingTop: "1rem", borderTop: "1px solid #dfe7e2",
+    marginTop: "1.5rem", paddingTop: "1rem", borderTop: "1px solid #D9D3CB",
   },
   cancel: {
     padding: "0.55rem 1.2rem", background: "transparent",
-    border: "1.5px solid #dfe7e2", borderRadius: 8, cursor: "pointer",
-    fontFamily: "inherit", fontSize: "0.88rem", color: "#5b6b63",
+    border: "1.5px solid #D9D3CB", borderRadius: 8, cursor: "pointer",
+    fontFamily: "inherit", fontSize: "0.88rem", color: "#5C5F58",
   },
   save: {
-    padding: "0.55rem 1.4rem", background: "#1f5b4c", color: "#fff",
+    padding: "0.55rem 1.4rem", background: "#00357A", color: "#fff",
     border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer",
     fontFamily: "inherit", fontSize: "0.88rem",
   },

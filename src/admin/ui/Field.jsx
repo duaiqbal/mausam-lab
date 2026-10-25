@@ -52,16 +52,16 @@ export function Select({ value, onChange, options, required }) {
 }
 
 const s = {
-  label: { display: "block", fontWeight: 600, fontSize: "0.83rem", color: "#1c2622", marginBottom: 4 },
-  hint:  { margin: "0 0 4px", fontSize: "0.75rem", color: "#5b6b63" },
+  label: { display: "block", fontWeight: 600, fontSize: "0.83rem", color: "#22261F", marginBottom: 4 },
+  hint:  { margin: "0 0 4px", fontSize: "0.75rem", color: "#5C5F58" },
   input: {
     width: "100%",
     padding: "0.6rem 0.85rem",
-    border: "1.5px solid #dfe7e2",
+    border: "1.5px solid #D9D3CB",
     borderRadius: 7,
     fontSize: "0.9rem",
     fontFamily: "inherit",
-    color: "#1c2622",
+    color: "#22261F",
     background: "#fff",
     outline: "none",
     boxSizing: "border-box",

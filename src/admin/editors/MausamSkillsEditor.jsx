@@ -15,9 +15,9 @@ function Btn({ onClick, children, danger, outline }) {
       style={{
         padding: "4px 14px", borderRadius: 6, cursor: "pointer",
         fontFamily: "inherit", fontSize: "0.78rem", fontWeight: 600,
-        background: danger ? "#c0392b" : outline ? "transparent" : "#1f5b4c",
-        color: danger || !outline ? "#fff" : "#1f5b4c",
-        border: outline ? "1.5px solid #1f5b4c" : "none",
+        background: danger ? "#c0392b" : outline ? "transparent" : "#00357A",
+        color: danger || !outline ? "#fff" : "#00357A",
+        border: outline ? "1.5px solid #00357A" : "none",
         marginRight: 6,
       }}
     >
@@ -27,16 +27,16 @@ function Btn({ onClick, children, danger, outline }) {
 }
 
 function Table({ cols, rows, onEdit, onDelete }) {
-  if (!rows.length) return <p style={{ color: "#5b6b63", marginTop: 12, fontSize: "0.875rem" }}>No items yet.</p>;
+  if (!rows.length) return <p style={{ color: "#5C5F58", marginTop: 12, fontSize: "0.875rem" }}>No items yet.</p>;
   return (
     <div style={{ overflowX: "auto", marginTop: 12 }}>
-      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.85rem", background: "#fff", borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 8px rgba(28,38,34,0.07)" }}>
+      <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.85rem", background: "#fff", borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 8px rgba(34,38,31,0.07)" }}>
         <thead>
           <tr>{cols.map(c => <th key={c.key} style={th}>{c.label}</th>)}<th style={th}>Actions</th></tr>
         </thead>
         <tbody>
           {rows.map((row, i) => (
-            <tr key={row.id} style={{ background: i % 2 === 0 ? "#fff" : "#f9fbfa" }}>
+            <tr key={row.id} style={{ background: i % 2 === 0 ? "#fff" : "#F6F3F0" }}>
               {cols.map(c => <td key={c.key} style={td}>{c.render ? c.render(row) : String(row[c.key] ?? "")}</td>)}
               <td style={td}>
                 <Btn onClick={() => onEdit(row)}>Edit</Btn>
@@ -140,8 +140,8 @@ export default function MausamSkillsEditor() {
       {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 12, marginBottom: "1rem" }}>
         <div>
-          <h1 style={{ margin: 0, fontSize: "1.6rem", color: "#1f5b4c" }}>Mausam Skills</h1>
-          <p style={{ margin: "4px 0 0", color: "#5b6b63", fontSize: "0.875rem" }}>
+          <h1 style={{ margin: 0, fontSize: "1.6rem", color: "#00357A" }}>Mausam Skills</h1>
+          <p style={{ margin: "4px 0 0", color: "#5C5F58", fontSize: "0.875rem" }}>
             Manage skill categories, individual skills, and their learning resources.
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function MausamSkillsEditor() {
       </div>
 
       {/* Tab bar */}
-      <div style={{ display: "flex", gap: 4, borderBottom: "2px solid #dfe7e2", marginBottom: "1.25rem" }}>
+      <div style={{ display: "flex", gap: 4, borderBottom: "2px solid #D9D3CB", marginBottom: "1.25rem" }}>
         {TABS.map(t => (
           <button
             key={t.id}
@@ -162,8 +162,8 @@ export default function MausamSkillsEditor() {
               padding: "8px 18px", border: "none", cursor: "pointer",
               fontFamily: "inherit", fontSize: "0.875rem", fontWeight: tab === t.id ? 700 : 500,
               background: "transparent",
-              color: tab === t.id ? "#1f5b4c" : "#5b6b63",
-              borderBottom: tab === t.id ? "2px solid #1f5b4c" : "2px solid transparent",
+              color: tab === t.id ? "#00357A" : "#5C5F58",
+              borderBottom: tab === t.id ? "2px solid #00357A" : "2px solid transparent",
               marginBottom: -2,
             }}
           >
@@ -191,7 +191,7 @@ export default function MausamSkillsEditor() {
       {tab === "skills" && (
         <>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
-            <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "#5b6b63" }}>Filter by category:</label>
+            <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "#5C5F58" }}>Filter by category:</label>
             <select value={filterCat} onChange={e => setFilterCat(e.target.value)} style={filterSel}>
               <option value="all">All categories</option>
               {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
@@ -216,7 +216,7 @@ export default function MausamSkillsEditor() {
       {tab === "resources" && (
         <>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
-            <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "#5b6b63" }}>Filter by skill:</label>
+            <label style={{ fontSize: "0.82rem", fontWeight: 600, color: "#5C5F58" }}>Filter by skill:</label>
             <select value={filterSkill} onChange={e => setFilterSkill(e.target.value)} style={filterSel}>
               <option value="all">All skills</option>
               {skills.map(s => <option key={s.id} value={s.id}>{catName(s.category_id)} → {s.name}</option>)}
@@ -327,6 +327,6 @@ export default function MausamSkillsEditor() {
   );
 }
 
-const th = { background: "#1f5b4c", color: "#fff", padding: "0.65rem 1rem", textAlign: "left", fontWeight: 600, fontSize: "0.78rem", letterSpacing: "0.03em", whiteSpace: "nowrap" };
-const td = { padding: "0.6rem 1rem", borderBottom: "1px solid #dfe7e2", verticalAlign: "top", maxWidth: 240, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontSize: "0.85rem" };
-const filterSel = { padding: "5px 10px", border: "1.5px solid #dfe7e2", borderRadius: 6, fontFamily: "inherit", fontSize: "0.85rem", color: "#1c2622" };
+const th = { background: "#00357A", color: "#fff", padding: "0.65rem 1rem", textAlign: "left", fontWeight: 600, fontSize: "0.78rem", letterSpacing: "0.03em", whiteSpace: "nowrap" };
+const td = { padding: "0.6rem 1rem", borderBottom: "1px solid #D9D3CB", verticalAlign: "top", maxWidth: 240, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", fontSize: "0.85rem" };
+const filterSel = { padding: "5px 10px", border: "1.5px solid #D9D3CB", borderRadius: 6, fontFamily: "inherit", fontSize: "0.85rem", color: "#22261F" };

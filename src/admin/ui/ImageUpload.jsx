@@ -41,7 +41,7 @@ export default function ImageUpload({ currentUrl, onUploaded, folder = "general"
         <img
           src={currentUrl}
           alt="Current"
-          style={{ maxWidth: 200, maxHeight: 140, borderRadius: 8, marginBottom: 8, border: "1px solid #dfe7e2", objectFit: "cover" }}
+          style={{ maxWidth: 200, maxHeight: 140, borderRadius: 8, marginBottom: 8, border: "1px solid #D9D3CB", objectFit: "cover" }}
         />
       )}
       <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
@@ -59,7 +59,7 @@ export default function ImageUpload({ currentUrl, onUploaded, folder = "general"
           </button>
         )}
         {currentUrl && (
-          <span style={{ fontSize: "0.75rem", color: "#5b6b63", wordBreak: "break-all", maxWidth: 260 }}>
+          <span style={{ fontSize: "0.75rem", color: "#5C5F58", wordBreak: "break-all", maxWidth: 260 }}>
             {currentUrl.split("/").pop()}
           </span>
         )}
@@ -73,7 +73,7 @@ export default function ImageUpload({ currentUrl, onUploaded, folder = "general"
 const s = {
   btn: {
     padding: "0.45rem 1rem",
-    background: "#1f5b4c",
+    background: "#00357A",
     color: "#fff",
     border: "none",
     borderRadius: 7,
