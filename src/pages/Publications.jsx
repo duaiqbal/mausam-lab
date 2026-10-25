@@ -1,7 +1,7 @@
 import { useState, useMemo } from "react";
 import PageMeta from "./PageMeta";
 import { publications as staticPubs } from "../data/publications";
-import { useCmsData } from "../lib/useCmsData";
+import { usePublications } from "../lib/usePublications";
 import SectionHeader from "../components/SectionHeader";
 
 const TYPES  = ["All", "Research", "Policy Brief", "Article", "Commentary", "Explainer", "Report", "Guide"];
@@ -125,7 +125,7 @@ function PubCard({ pub, onReadMore }) {
 
 /* ── Main page ──────────────────────────────────────────────────────── */
 export default function Publications() {
-  const { data: pubs, loading } = useCmsData("publications", staticPubs);
+  const { data: pubs, loading } = usePublications(staticPubs);
   const [search, setSearch] = useState("");
   const [type,   setType]   = useState("All");
   const [topic,  setTopic]  = useState("All");

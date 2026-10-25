@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import Hero from "../components/Hero";
 import SectionHeader from "../components/SectionHeader";
 import PageMeta from "./PageMeta";
-import { useCmsData } from "../lib/useCmsData";
+import { usePublications } from "../lib/usePublications";
 import { publications } from "../data/publications";
 
 const WHAT_WE_DO = [
@@ -14,7 +14,7 @@ const WHAT_WE_DO = [
 ];
 
 export default function Home() {
-  const { data: pubs } = useCmsData("publications", publications);
+  const { data: pubs } = usePublications(publications);
   const featuredPubs   = pubs.slice(0, 3);
 
   return (
