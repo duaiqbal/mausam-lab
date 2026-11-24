@@ -1,0 +1,26 @@
+# Keeps the Supabase Free-plan project from being paused for inactivity.
+# Supabase pauses free projects after ~7 days with low activity; this sends
+# one small read request every 3 days. The anon key is the same public key
+# that is already shipped in the website's JavaScript, so it is not a secret.
+name: Supabase keep-alive
+
+on:
+  schedule:
+    - cron: "0 6 */3 * *"   # 06:00 UTC every 3 days
+  workflow_dispatch:         # allows a manual run from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_URL: https://zuiptbarbpqnumyhzlny.supabase.co
+      SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp1aXB0YmFyYnBxbnVteWh6bG55Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU0NTM2NjMsImV4cCI6MjExMTAyOTY2M30.jYum0lG41sENqKT9WsQridsGv6JTfl30YMRnzOaLmto
+    steps:
+      - name: Query the database
+        run: |
+          status=$(curl -s -o /dev/null -w "%{http_code}" \
+            -H "apikey: $SUPABASE_ANON_KEY" \
+            -H "Authorization: Bearer $SUPABASE_ANON_KEY" \
+            "$SUPABASE_URL/rest/v1/site_config?select=id&limit=1")
+          echo "Supabase responded with HTTP $status"
+          test "$status" = "200"

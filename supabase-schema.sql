@@ -375,3 +375,15 @@ select cat.id, s.name, s.ord from cat,
     ('Disaster Risk Reduction', 4), ('Environmental Security', 5)
   ) as s(name, ord)
 on conflict do nothing;
+
+-- =============================================================================
+-- TABLE PERMISSIONS
+-- New Supabase projects do not let the website (anon) or the logged-in admin
+-- (authenticated) read the tables until these grants exist. Without them the
+-- site and admin get "permission denied". RLS policies above still control writes.
+-- =============================================================================
+grant usage on schema public to anon, authenticated;
+grant select on all tables in schema public to anon;
+grant select, insert, update, delete on all tables in schema public to authenticated;
+alter default privileges in schema public grant select on tables to anon;
+alter default privileges in schema public grant select, insert, update, delete on tables to authenticated;
